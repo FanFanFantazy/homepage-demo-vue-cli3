@@ -8,8 +8,47 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
+    },
+    {
+      path: '/about',
+      name: 'VideoHub',
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      children: [
+        {
+          path: '/about',
+          name: 'Option1',
+          component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+        },
+        {
+          path: '/about',
+          name: 'Option2',
+          component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+        },
+        {
+          path: '/about',
+          name: 'Option3',
+          component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+          children: [
+            {
+              path: '/about',
+              name: 'Option1',
+              component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+            }
+          ]
+        }
+      ]
+    },
+    {
+      path: '/about',
+      name: 'DocHub',
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+    },
+    {
+      path: '/about',
+      name: 'Others',
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
       path: '/about',
