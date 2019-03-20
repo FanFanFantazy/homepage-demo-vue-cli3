@@ -4,7 +4,7 @@
       el-header
         fanMenu
       el-main
-      el-footer(height="100px")
+      el-footer(height="50px")
         fanFooter
   </div>
 </template>
