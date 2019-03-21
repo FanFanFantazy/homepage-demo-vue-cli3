@@ -1,9 +1,10 @@
 <template lang="pug">
   <div class="home">
-    el-container
+    el-container.is-vertical.page
       el-header
         fanMenu
       el-main
+        router-view
       el-footer(height="50px")
         fanFooter
   </div>
@@ -29,8 +30,13 @@ export default {
 }
 .el-container {
   background-color: #222;
+  width: 100%;
   height: 700px;
   padding: 0px;
+}
+.page {
+  width: 100%;
+  height: 100%;
 }
 </style>
 >
