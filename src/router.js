@@ -10,7 +10,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/spider',
@@ -23,25 +23,25 @@ export default new Router({
       }]
     },
     {
-      path: '/about',
+      path: '/videoHub',
       name: 'VideoHub',
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue'),
+      component: Home,
       children: [{
-          path: '/about',
+          path: 'option',
           name: 'Option1',
           component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
         },
         {
-          path: '/about',
+          path: 'option',
           name: 'Option2',
           component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
         },
         {
-          path: '/about',
+          path: 'option',
           name: 'Option3',
           component: () => import( /* webpackChunkName: "about" */ './views/About.vue'),
           children: [{
-            path: '/about',
+            path: 'option',
             name: 'Option1',
             component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
           }]
@@ -49,22 +49,24 @@ export default new Router({
       ]
     },
     {
-      path: '/about',
+      path: '/docHub',
       name: 'DocHub',
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+      component: Home,
     },
     {
-      path: '/about',
+      path: '/other',
       name: 'Others',
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+      component: Home,
     },
     {
       path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+      name: 'About',
+      component: Home,
+      children: [{
+        path: 'aboutInfo',
+        name: 'Info',
+        component: () => import( /* webpackChunkName: "aboutInfo" */ './views/About.vue')
+      }]
     }
   ]
 })
