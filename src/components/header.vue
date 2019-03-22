@@ -11,7 +11,7 @@
               el-menu-item(v-if="!item3.children", :index="item3.path") {{item3.name}}
               el-submenu(v-if="item3.children", :index="item3.path")
               template(slot="title") {{item3.name}}
-      el-submenu(v-for="(item, index) in menuData", v-if="item.children", :index="item.path")
+      el-submenu(v-for="(item, index) in menuData", v-if="item.children", :key="index", :index="item.path")
         template(slot="title") {{item.name}}
         span(v-if="item.children", v-for="item2 in item.children")
           el-menu-item(v-if="!item2.children", :index="item2.path") {{item2.name}}
@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     handleSelect (val, val2) {
-      console.log(val2)
       let pathRoad = ''
       for (let i = 0; i < val2.length; i++) {
         pathRoad += i === 0 ? val2[0] : `/${val2[i]}`

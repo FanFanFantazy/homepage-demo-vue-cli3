@@ -1,21 +1,22 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Layout from './views/Layout.vue'
+import Layout2 from './views/Layout2.vue'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [{
-      path: '/',
+      path: '/home',
       name: 'Home',
-      component: Home,
+      component: () => import( /* webpackChunkName: "socialStatus" */ '@/modules/homepage/homepage.vue'),
     },
     {
       path: '/spider',
       name: 'SpiderMan',
-      component: Home,
+      component: Layout,
       children: [{
         path: 'socialStatus',
         name: ' SocialStatus',
@@ -25,25 +26,27 @@ export default new Router({
     {
       path: '/videoHub',
       name: 'VideoHub',
-      component: Home,
+      component: Layout,
       children: [{
           path: 'option',
           name: 'Option1',
-          component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+          component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
         },
         {
           path: 'option',
           name: 'Option2',
-          component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+          component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
         },
         {
           path: 'option',
           name: 'Option3',
-          component: () => import( /* webpackChunkName: "about" */ './views/About.vue'),
+          component: {
+            template: '<router-view/>',
+          },
           children: [{
             path: 'option',
             name: 'Option1',
-            component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
+            component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
           }]
         }
       ]
@@ -51,21 +54,21 @@ export default new Router({
     {
       path: '/docHub',
       name: 'DocHub',
-      component: Home,
+      component: Layout,
     },
     {
       path: '/other',
       name: 'Others',
-      component: Home,
+      component: Layout,
     },
     {
       path: '/about',
       name: 'About',
-      component: Home,
+      component: Layout2,
       children: [{
         path: 'aboutInfo',
         name: 'Info',
-        component: () => import( /* webpackChunkName: "aboutInfo" */ './views/About.vue')
+        component: () => import( /* webpackChunkName: "aboutInfo" */ './modules/about/info.vue')
       }]
     }
   ]

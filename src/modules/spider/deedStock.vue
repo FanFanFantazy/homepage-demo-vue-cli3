@@ -22,7 +22,7 @@
 /* eslint-disable */
 let request = require('request')
 let cheerio = require('cheerio')
-const baseUrl = 'https://www.socialstatuspgh.com'
+const baseUrl = 'https://www.deadstock.ca'
 const arr = []
 
 export default {

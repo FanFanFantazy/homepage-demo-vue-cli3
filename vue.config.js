@@ -44,5 +44,6 @@ module.exports = {
   pluginOptions: {
     // 第三方插件配置
     // ...
-  }
+  },
+  runtimeCompiler: true
 }

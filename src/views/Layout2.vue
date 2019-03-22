@@ -13,6 +13,7 @@
 <script>
 import fanFooter from '@/components/footer.vue'
 import fanMenu from '@/components/header.vue'
+
 export default {
   name: 'home',
   components: {
@@ -22,11 +23,21 @@ export default {
 }
 </script>
 <style scoped>
-.el-header, .el-footer {
+.el-header {
   background-color: #333;
   color: #333;
   text-align: center;
   padding: 0px;
+}
+.el-footer {
+  height: "50px";
+  width: 100%;
+  background-color: #333;
+  color: #333;
+  text-align: center;
+  padding: 0px;
+  position: fixed;
+  bottom: 0px;
 }
 .el-container {
   background-color: #222;

@@ -3,8 +3,9 @@
     el-container.is-vertical.page
       el-header
         fanMenu
-      el-main
-        img(src="./homeBG.jpg", style="width: 100%;")
+      el-main(style="width:90%")
+        router-view
+        asideTools
       el-footer
         fanFooter
   </div>
@@ -13,33 +14,18 @@
 <script>
 import fanFooter from '@/components/footer.vue'
 import fanMenu from '@/components/header.vue'
+import asideTools from '@/components/asideTools.vue'
+
 export default {
   name: 'home',
   components: {
     fanMenu,
-    fanFooter
-  },
-  data () {
-    return {
-      loading: null
-    }
-  },
-  created () {
-    this.loading = this.$loading({
-      lock: true,
-      background: 'rgba(0, 0, 0, 0.9)'
-    })
-  },
-  mounted () {
-    this.loading.close()
+    fanFooter,
+    asideTools
   }
 }
 </script>
 <style scoped>
-.el-main {
-  margin: 0px;
-  padding: 0px;
-}
 .el-header {
   background-color: #333;
   color: #333;
