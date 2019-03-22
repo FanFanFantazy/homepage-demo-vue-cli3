@@ -23,10 +23,10 @@
 let request = require('request')
 let cheerio = require('cheerio')
 const baseUrl = 'https://www.deadstock.ca'
-const arr = []
+let arr = []
 
 export default {
-  name: 'socialStatus',
+  name: 'deedStock',
   props: {
   },
   data () {
@@ -38,7 +38,8 @@ export default {
     this.handleSelect()
   },
   beforeDestroy() {
-    this.listAry = [];
+    this.listAry = []
+    arr = []
   },
   methods: {
     handleSelect () {
@@ -46,8 +47,9 @@ export default {
         lock: true,
         background: 'rgba(0, 0, 0, 0.9)',
       });
+      this.listAry = [];
       request({
-        url: `${baseUrl}/collections/sneakers/jordan`,
+        url: `${baseUrl}/collections/jordan`,
         method: 'GET',
         headers: {
           'User-Agent': 'Chrome/71.0.3578.98'
@@ -56,35 +58,29 @@ export default {
         loading.close();
         if (err) return console.log(err)
         let $ = cheerio.load(res.body.toString())
-        let segement = $('.product')
+        var segement = $('.grid__item')
         segement.each(function () {
-          let title = $(this).find('.text-container').find('h1').text().trim()
-          let temp = $(this).find('.product-price-container').text().trim().replace(/\s+/g, '').split('$')
-          let price = `$${temp[temp.length - 1]}`
-          let url = `${baseUrl}${$(this).find('.product-card').attr('href')}`
-          let image = `https:${$(this).find('img').attr('src')}`
-          arr.push({
-            title: title.split('[')[0],
-            subTitle: title.split('[').splice(1, 1).length !== 0 ? `[${title.split('[').splice(1, 1)}` : '',
-            url: url,
-            price: price,
-            image: image
-          })
+          var title = $(this).find('.grid-product__meta').find('.grid-product__title').text().trim()
+          if (title !== undefined && title !== null && title !== '') {
+            var temp = $(this).find('.grid-product__price').find('.money').text().trim().split('$')
+            var price = `$${temp[temp.length - 1]}`
+            var url = `${baseUrl}${$(this).find('.grid-product__meta').attr('href')}`
+            var image = `https:${$(this).find('img').attr('src')}`.split('150x150').join('342x342')
+            arr.push({
+              title: title,
+              subTitle: title,
+              url: url,
+              price: price,
+              image: image
+            })
+          }
         })
         if (arr.length === 0) {
           return
         }
       })
-      console.dir(arr)
       this.listAry = arr
     },
-    chunk(array) {
-      var arr2 = [];
-        array.forEach(element => {
-          arr2.push(element.slice(i, i + 4));
-        })
-      return arr2;
-    }
   }
 }
 </script>

@@ -3,7 +3,7 @@
     el-container.is-vertical.page
       el-header
         fanMenu
-      el-main(style="width:90%")
+      el-main(style="width:90%;min-height:700px")
         router-view
         asideTools
       el-footer

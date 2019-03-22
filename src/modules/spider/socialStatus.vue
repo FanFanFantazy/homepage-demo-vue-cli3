@@ -23,7 +23,7 @@
 let request = require('request')
 let cheerio = require('cheerio')
 const baseUrl = 'https://www.socialstatuspgh.com'
-const arr = []
+let arr = []
 
 export default {
   name: 'socialStatus',
@@ -38,7 +38,8 @@ export default {
     this.handleSelect()
   },
   beforeDestroy() {
-    this.listAry = [];
+    this.listAry = []
+    arr = []
   },
   methods: {
     handleSelect () {
@@ -75,16 +76,8 @@ export default {
           return
         }
       })
-      console.dir(arr)
       this.listAry = arr
     },
-    chunk(array) {
-      var arr2 = [];
-        array.forEach(element => {
-          arr2.push(element.slice(i, i + 4));
-        })
-      return arr2;
-    }
   }
 }
 </script>

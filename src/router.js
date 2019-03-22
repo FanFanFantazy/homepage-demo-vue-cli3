@@ -18,10 +18,16 @@ export default new Router({
       name: 'SpiderMan',
       component: Layout,
       children: [{
-        path: 'socialStatus',
-        name: ' SocialStatus',
-        component: () => import( /* webpackChunkName: "socialStatus" */ '@/modules/spider/socialStatus.vue')
-      }]
+          path: 'socialStatus',
+          name: ' SocialStatus',
+          component: () => import( /* webpackChunkName: "socialStatus" */ '@/modules/spider/socialStatus.vue')
+        },
+        {
+          path: 'deedStock',
+          name: ' DeedStock',
+          component: () => import( /* webpackChunkName: "deedStock" */ '@/modules/spider/deedStock.vue')
+        }
+      ]
     },
     {
       path: '/videoHub',
