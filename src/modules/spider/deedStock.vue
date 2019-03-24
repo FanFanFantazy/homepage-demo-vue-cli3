@@ -3,23 +3,26 @@
     el-input.inputStyle(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
       el-button(slot="append", @click="searchInfo") Search
     el-row(:gutter="20")
-      el-col(v-for="(item2, index2) in listAry", :key="item2.id", :span="6")
+      el-col(v-for="(item, index2) in listAry", :key="item.id", :span="6")
         el-card.cardStyle
           el-row
             el-col(:span="6")
-              img.imageStyle(:src="item2.image")
+              img.imageStyle(:src="item.image", @click = "openDialog(item)")
             el-col(:span="18")
               div(style="margin-left:10px; height: 70px; overflow:hidden; display:block-inline")
-                div.titleHover
-                  span.titleStyle {{item2.title}}
-                span.subStyle {{item2.subTitle}}
+                div.titleHover(@click="jumpToPage(item.url)")
+                  span.titleStyle {{item.title}}
+                span.subStyle {{item.subTitle}}
               div(style="height:30px; display:block; margin-top:10px; margin-left:10px;")
-                span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item2.price}}
+                span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item.price}}
     el-row
       div(style="display: block; height:50px")
+    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog")
 </template>
 
 <script>
+import shoeDialog from './shoeViewComp/shoeDialog.vue'
+import _ from 'lodash'
 /* eslint-disable */
 let request = require('request')
 let cheerio = require('cheerio')
@@ -30,10 +33,15 @@ export default {
   name: 'deedStock',
   props: {
   },
+  components: {
+    shoeDialog,
+  },
   data () {
     return {
       listAry: [],
       inputVal: 'jordan',
+      visibleVal: false,
+      diaInfro: {}
     }
   },
   created () {
@@ -44,6 +52,16 @@ export default {
     arr = []
   },
   methods: {
+    openDialog(val) {
+      this.visibleVal = true
+      this.diaInfro = _.cloneDeep(val)
+    },
+    closeDialog(val) {
+      this.visibleVal = val
+    },
+    jumpToPage (val) {
+      window.open(val)
+    },
     searchInfo () {
       this.handleSelect(this.inputVal)
     },
@@ -66,11 +84,12 @@ export default {
         loading.close();
         if (res.statusCode === 404)  {
           that.$message({
-            message: 'Invalid Category!',
+            message: `Invalid Category! Pls Try 'footwear-${val}' or 'brand-${val}'`,
             showClose: true,
             type: 'error'
           });
         }
+        if (err) return console.log(err)
         let $ = cheerio.load(res.body.toString())
         var segement = $('.grid__item')
         segement.each(function () {
@@ -79,7 +98,7 @@ export default {
             var temp = $(this).find('.grid-product__price').find('.money').text().trim().split('$')
             var price = `$${temp[temp.length - 1]}`
             var url = `${baseUrl}${$(this).find('.grid-product__meta').attr('href')}`
-            var image = `https:${$(this).find('img').attr('src')}`.split('150x150').join('342x342')
+            var image = `https:${$(this).find('img').attr('src')}`.split('150x150').join('720x720')
             arr.push({
               title: title,
               subTitle: title,

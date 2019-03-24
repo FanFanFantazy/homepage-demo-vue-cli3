@@ -63,9 +63,9 @@ export default {
 <style scoped>
 .imageStyle {
   width: 700px;
-  margin-top: -300px;
+  /* margin-top: -300px;
   position: absolute;
-  clip:rect(300px, 700px , 980px , 0px);
+  clip:rect(300px, 700px , 980px , 0px); */
 }
 .closeStyle {
   font-size: 20px;

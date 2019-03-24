@@ -1,19 +1,20 @@
 <template lang="pug">
   div
+    el-input.inputStyle(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
+      el-button(slot="append", @click="searchInfo") Search
     el-row(:gutter="20")
-      //- el-row(v-for="(item, index) in listAry", v-if="index%4 === 0" :key="item.id", :gutter="20")
-      el-col(v-for="(item2, index2) in listAry", :key="item2.id", :span="6")
+      el-col(v-for="(item, index2) in listAry", :key="item.id", :span="6")
         el-card.cardStyle
           el-row
             el-col(:span="6")
-              img.imageStyle(:src="item2.image", @click = "openDialog(item2)")
+              img.imageStyle(:src="item.image", @click = "openDialog(item)")
             el-col(:span="18")
               div(style="margin-left:10px; height: 70px; overflow:hidden; display:block-inline")
-                div.titleHover
-                  span.titleStyle {{item2.title}}
-                span.subStyle {{item2.subTitle}}
+                div.titleHover(@click="jumpToPage(item.url)")
+                  span.titleStyle {{item.title}}
+                span.subStyle {{item.subTitle}}
               div(style="height:30px; display:block; margin-top:10px; margin-left:10px;")
-                span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item2.price}}
+                span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item.price}}
     el-row
       div(style="display: block; height:50px")
     shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog")
@@ -38,12 +39,13 @@ export default {
   data () {
     return {
       listAry: [],
+      inputVal: 'jordan',
       visibleVal: false,
       diaInfro: {}
     }
   },
   created () {
-    this.handleSelect()
+    this.handleSelect('jordan')
   },
   beforeDestroy() {
     this.listAry = []
@@ -57,19 +59,36 @@ export default {
     closeDialog(val) {
       this.visibleVal = val
     },
-    handleSelect () {
+    jumpToPage (val) {
+      window.open(val)
+    },
+    searchInfo () {
+      this.handleSelect(this.inputVal)
+    },
+    handleSelect (val) {
+      val = val === '' ? 'jordan' : val
       const loading = this.$loading({
         lock: true,
         background: 'rgba(0, 0, 0, 0.9)',
       });
+      arr = []
+      this.listAry = [];
+      const that = this
       request({
-        url: `${baseUrl}/collections/sneakers/jordan`,
+        url: `${baseUrl}/collections/sneakers/${val}`,
         method: 'GET',
         headers: {
           'User-Agent': 'Chrome/71.0.3578.98'
         }
       }, function (err, res) {
         loading.close();
+        if (res.statusCode === 404)  {
+          that.$message({
+            message: 'Invalid Category!',
+            showClose: true,
+            type: 'error'
+          });
+        }
         if (err) return console.log(err)
         let $ = cheerio.load(res.body.toString())
         let segement = $('.product')
@@ -126,5 +145,12 @@ export default {
   height: 95px;
   display: block;
   cursor: pointer;
+}
+.inputStyle {
+  width: 30%;
+  position: absolute;
+  margin-top: -62px;
+  margin-left: 13.8%;
+  z-index: 2;
 }
 </style>
