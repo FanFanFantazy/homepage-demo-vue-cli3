@@ -56,7 +56,7 @@ export default {
     },
     toHome () {
       this.$router.push({
-        path: '/home'
+        path: '/'
       })
     },
     toAbout () {

@@ -1,7 +1,8 @@
 <template lang="pug">
   div
+    el-input.inputStyle(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
+      el-button(slot="append", @click="searchInfo") Search
     el-row(:gutter="20")
-      //- el-row(v-for="(item, index) in listAry", v-if="index%4 === 0" :key="item.id", :gutter="20")
       el-col(v-for="(item2, index2) in listAry", :key="item2.id", :span="6")
         el-card.cardStyle
           el-row
@@ -32,31 +33,44 @@ export default {
   data () {
     return {
       listAry: [],
+      inputVal: 'jordan',
     }
   },
   created () {
-    this.handleSelect()
+    this.handleSelect('jordan')
   },
   beforeDestroy() {
     this.listAry = []
     arr = []
   },
   methods: {
-    handleSelect () {
+    searchInfo () {
+      this.handleSelect(this.inputVal)
+    },
+    handleSelect (val) {
+      val = val === '' ? 'jordan' : val
       const loading = this.$loading({
         lock: true,
         background: 'rgba(0, 0, 0, 0.9)',
       });
+      arr = []
       this.listAry = [];
+      const that = this
       request({
-        url: `${baseUrl}/collections/jordan`,
+        url: `${baseUrl}/collections/${val}`,
         method: 'GET',
         headers: {
           'User-Agent': 'Chrome/71.0.3578.98'
         }
       }, function (err, res) {
         loading.close();
-        if (err) return console.log(err)
+        if (res.statusCode === 404)  {
+          that.$message({
+            message: 'Invalid Category!',
+            showClose: true,
+            type: 'error'
+          });
+        }
         let $ = cheerio.load(res.body.toString())
         var segement = $('.grid__item')
         segement.each(function () {
@@ -114,5 +128,12 @@ export default {
   height: 95px;
   display: block;
   cursor: pointer;
+}
+.inputStyle {
+  width: 30%;
+  position: absolute;
+  margin-top: -62px;
+  margin-left: 13.8%;
+  z-index: 2;
 }
 </style>

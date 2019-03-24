@@ -9,7 +9,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [{
-      path: '/home',
+      path: '/',
       name: 'Home',
       component: () => import( /* webpackChunkName: "socialStatus" */ '@/modules/homepage/homepage.vue'),
     },
@@ -72,10 +72,16 @@ export default new Router({
       name: 'About',
       component: Layout2,
       children: [{
-        path: 'aboutInfo',
-        name: 'Info',
-        component: () => import( /* webpackChunkName: "aboutInfo" */ './modules/about/info.vue')
-      }]
+          path: 'aboutInfo',
+          name: 'Info',
+          component: () => import( /* webpackChunkName: "aboutInfo" */ './modules/about/info.vue')
+        },
+        {
+          path: 'authorInro',
+          name: 'Author',
+          component: () => import( /* webpackChunkName: "aboutInfo" */ './modules/about/author.vue')
+        },
+      ]
     }
   ]
 })

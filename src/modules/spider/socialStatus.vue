@@ -6,7 +6,7 @@
         el-card.cardStyle
           el-row
             el-col(:span="6")
-              img.imageStyle(:src="item2.image")
+              img.imageStyle(:src="item2.image", @click = "openDialog(item2)")
             el-col(:span="18")
               div(style="margin-left:10px; height: 70px; overflow:hidden; display:block-inline")
                 div.titleHover
@@ -16,9 +16,12 @@
                 span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item2.price}}
     el-row
       div(style="display: block; height:50px")
+    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog")
 </template>
 
 <script>
+import shoeDialog from './shoeViewComp/shoeDialog.vue'
+import _ from 'lodash'
 /* eslint-disable */
 let request = require('request')
 let cheerio = require('cheerio')
@@ -29,9 +32,14 @@ export default {
   name: 'socialStatus',
   props: {
   },
+  components: {
+    shoeDialog,
+  },
   data () {
     return {
       listAry: [],
+      visibleVal: false,
+      diaInfro: {}
     }
   },
   created () {
@@ -42,6 +50,13 @@ export default {
     arr = []
   },
   methods: {
+    openDialog(val) {
+      this.visibleVal = true
+      this.diaInfro = _.cloneDeep(val)
+    },
+    closeDialog(val) {
+      this.visibleVal = val
+    },
     handleSelect () {
       const loading = this.$loading({
         lock: true,
