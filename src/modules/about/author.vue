@@ -1,5 +1,5 @@
 <template lang="pug">
-div(style="color:#ddd; min-height:650px")
+div(style="color:#ddd; min-height:1000px")
   el-col(:span="2")
     p
   el-col(:span="5")
@@ -30,6 +30,7 @@ div(style="color:#ddd; min-height:650px")
         el-button.buttonStyle(type="info", style="text-align: left;", @click="jumpToMedia(item.url)")
           img.iconStyle(:src="item.image")
           span(style="margin-left: 10px; font-size:20px; vertical-align: middle;") {{item.method}}
+
 </template>
 <script>
 import education from './authorInfo/education.vue'
@@ -54,11 +55,11 @@ export default {
         { value: 'relevantSkills', label: 'RELEVANT SKILLS' }
       ],
       contract: [
-        { method: 'Facebook', url: 'https://facebook.com', image: '/iconSet/facebook.png' },
-        { method: 'Instagram', url: 'https://www.instagram.com', image: '/iconSet/instagram.jpg' },
-        { method: 'GitHub', url: 'https://github.com/', image: '/iconSet/GitHub.png' },
-        { method: 'WeChat', url: 'https://www.wechat.com/', image: '/iconSet/wechat.jpg' },
-        { method: 'E-mail', url: 'https://www.google.com/intl/zh-CN/gmail/about/#', image: '/iconSet/Gmail.jpg' }
+        { method: 'Facebook', url: 'https://facebook.com', image: '/iconSet/facebook.svg' },
+        { method: 'Instagram', url: 'https://www.instagram.com', image: '/iconSet/instagram.svg' },
+        { method: 'GitHub', url: 'https://github.com/', image: '/iconSet/github.svg' },
+        { method: 'WeChat', url: 'https://www.wechat.com/', image: '/iconSet/wechat.svg' },
+        { method: 'E-mail', url: 'https://www.google.com/intl/zh-CN/gmail/about/#', image: '/iconSet/gmail.svg' }
       ]
     }
   },
@@ -110,6 +111,7 @@ export default {
   clip:rect(0px, 30px , 30px , 0px);
   border-radius: 30px;
   vertical-align: middle;
+  color: #005bac
 }
 .el-carousel__item {
   color: #475669;
