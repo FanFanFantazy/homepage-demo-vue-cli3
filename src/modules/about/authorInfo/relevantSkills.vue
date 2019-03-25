@@ -4,9 +4,10 @@ el-row
     h3.left RELEVANT SKILLS
   hr.hrSt
   el-row
-    el-row(v-for="(item, index) in list", style="line-height:30px; text-align:left", :key="index")
+    el-row(v-for="(item, index) in list", style="line-height:30px; text-align:left; margin-bottom:10px", :key="index")
       span.labelStyle {{`${item.label}: `}}
-      span {{item.content}}
+      br
+      span(style="font-size:14px; font-style: italic;") {{item.content}}
 
 </template>
 <script>
@@ -26,6 +27,6 @@ export default {
 </script>
 <style scoped>
 .labelStyle {
-  font-weight: 700;
+  font-size: 16px;
 }
 </style>

@@ -11,7 +11,7 @@
         span.left {{item.position}}
         span.right {{item.duration}}
       p(style="text-align:left") Project Description:
-        span.left(style="text-align:justify") {{item.desc}}
+        span.left(style="text-align:justify; margin-top:10px; margin-bottom: 10px") {{item.desc}}
       br
       p(style="text-align:left") Contribution
       ul.thirdLine
@@ -44,7 +44,7 @@ export default {
 </script>
 <style scoped>
 .firstLine {
-  font-size: 18px;
+  font-size: 16px;
 }
 .secondLine {
   font-style: italic;

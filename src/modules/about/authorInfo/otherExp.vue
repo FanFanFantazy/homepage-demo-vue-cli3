@@ -22,7 +22,7 @@ export default {
           position: 'Package Solution Consultant, Consulting by Degree',
           duration: '2018.04 to now'
         },
-        { firm: 'Huaxia Dun & Bradstreet Business Information Consulting Co., Ltd',
+        { firm: 'Huaxia Dun & Bradstreet Consulting Co., Ltd',
           location: 'Shanghai, China',
           position: 'Business & Operation Intern',
           duration: '2017.10 – 2017.12'
@@ -44,7 +44,7 @@ export default {
 </script>
 <style scoped>
 .firstLine {
-  font-size: 18px;
+  font-size: 16px;
 }
 .secondLine {
   font-style: italic;
