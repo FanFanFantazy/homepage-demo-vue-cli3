@@ -30,8 +30,8 @@ export default new Router({
       ]
     },
     {
-      path: '/videoHub',
-      name: 'VideoHub',
+      path: '/nerdHub',
+      name: 'NerdHub',
       component: Layout,
       children: [{
           path: 'option',
@@ -56,16 +56,6 @@ export default new Router({
           }]
         }
       ]
-    },
-    {
-      path: '/docHub',
-      name: 'DocHub',
-      component: Layout,
-    },
-    {
-      path: '/other',
-      name: 'Others',
-      component: Layout,
     },
     {
       path: '/about',

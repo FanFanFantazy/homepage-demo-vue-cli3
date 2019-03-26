@@ -17,7 +17,7 @@
                 span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item.price}}
     el-row
       div(style="display: block; height:50px")
-    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog")
+    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog", widthVal="6")
 </template>
 
 <script>

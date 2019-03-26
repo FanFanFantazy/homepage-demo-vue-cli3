@@ -1,14 +1,14 @@
 <template lang="pug">
-  el-dialog.diaStyle(:title="initTitle", :visible.sync="visibleVal", width="70%", center, :before-close="closeDia")
-    el-row
-      el-col(:span="16")
-        div(style="width:100%; height:680px")
+  el-dialog.diaStyle(:title="initTitle", :visible.sync="visibleVal", :width="`${widthVal}0%`", center, :before-close="closeDia")
+    el-row(type="flex")
+      el-col(:span="(16/7)*widthVal")
+        div(style="height:680px")
           img.imageStyle(:src="diaInfro.image")
-      el-col(:span="7", style="color: #ccc;")
-        p(style="margin-top:5%; margine-left:10%; margin-right:5%; font-size:18px;") {{initTitle}}
+      el-col(style="color: #ccc; max-width: height: 680px; overflow:hidden; margin-left:20px; margin-right:5px;")
+        p(style="margin-top:5%; font-size:18px;") {{initTitle}}
         p(style="text-align: justify;  font-size:16px;") {{desc}}
         p(style="text-align: justify;  font-size:16px;") {{desc2}}
-      el-col(:span="1", style="text-align:right")
+      el-col(:span="2", style="text-align:right")
         div.closeStyle
           i(class="el-icon-close", @click="closeDia")
 
@@ -18,11 +18,12 @@
 import AJDesc from './AJDesc.js'
 
 export default {
-  props: ['visibleVal', 'diaInfro'],
+  props: ['visibleVal', 'diaInfro', 'widthVal'],
   data () {
     return {
       desc: '',
       desc2: ''
+      // widthVal: '50%'
     }
   },
   computed: {
@@ -62,12 +63,13 @@ export default {
 </style>
 <style scoped>
 .imageStyle {
-  width: 700px;
+  height: 680px;
   /* margin-top: -300px;
   position: absolute;
   clip:rect(300px, 700px , 980px , 0px); */
 }
 .closeStyle {
+  width: 35px;
   font-size: 20px;
   cursor: pointer;
   padding: 5px;

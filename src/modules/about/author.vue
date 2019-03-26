@@ -28,6 +28,9 @@ div(style="color:#ddd; min-height:800px")
         relevantSkills(v-else-if="phase==='relevantSkills'")
   el-col(:span="5")
     el-card.cardStyle.right(style="width: 95%;")
+      el-row
+        h4.left ACADEMIC
+      hr.hrSt
       el-carousel(height="200px", indicator-position="none", :autoplay="false", @change="whenCarouselChange")
         el-carousel-item(v-for="(item, index) in projects" :key="index", :label="item.title")
           img(:src="item.image", style="width:100%;")

@@ -17,7 +17,7 @@
                 span.subStyle(style="font-size:14px; color:#ccc; text-shadow: #000 2px 1px 2px;") Pice: {{item.price}}
     el-row
       div(style="display: block; height:50px")
-    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog")
+    shoeDialog(:visibleVal="visibleVal", :diaInfro = "diaInfro" @closeDia="closeDialog", widthVal="7")
 </template>
 
 <script>
@@ -99,9 +99,10 @@ export default {
             var price = `$${temp[temp.length - 1]}`
             var url = `${baseUrl}${$(this).find('.grid-product__meta').attr('href')}`
             var image = `https:${$(this).find('img').attr('src')}`.split('150x150').join('720x720')
+            console.log($(this).find('.grid-product__meta').find('.grid-product__title').text())
             arr.push({
-              title: title,
-              subTitle: title,
+              title: title.slice(0, title.length/2),
+              subTitle: title.split('[').splice(1, 1).length !== 0 ? `[${title.split('[').splice(1, 1)}` : '',
               url: url,
               price: price,
               image: image

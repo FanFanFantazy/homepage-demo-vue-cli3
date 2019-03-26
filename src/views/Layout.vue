@@ -41,6 +41,7 @@ export default {
   padding: 0px;
   position: fixed;
   bottom: 0px;
+  z-index: 3000;
 }
 .el-container {
   background-color: #222;
