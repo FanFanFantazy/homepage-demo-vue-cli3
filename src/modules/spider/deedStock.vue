@@ -1,7 +1,8 @@
 <template lang="pug">
   div
-    el-input.inputStyle(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
-      el-button(slot="append", @click="searchInfo") Search
+    el-row.inputStyle
+      el-input(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
+        el-button(slot="append", @click="searchInfo") Search
     el-row(:gutter="20")
       el-col(v-for="(item, index2) in listAry", :key="item.id", :span="6")
         el-card.cardStyle
@@ -72,13 +73,13 @@ export default {
         background: 'rgba(0, 0, 0, 0.9)',
       });
       arr = []
-      this.listAry = [];
+      this.listAry = []
       const that = this
       request({
         url: `${baseUrl}/collections/${val}`,
         method: 'GET',
         headers: {
-          'User-Agent': 'Chrome/71.0.3578.98'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0 Chrome/71.0.3578.98'
         }
       }, function (err, res) {
         loading.close();
@@ -99,7 +100,6 @@ export default {
             var price = `$${temp[temp.length - 1]}`
             var url = `${baseUrl}${$(this).find('.grid-product__meta').attr('href')}`
             var image = `https:${$(this).find('img').attr('src')}`.split('150x150').join('720x720')
-            console.log($(this).find('.grid-product__meta').find('.grid-product__title').text())
             arr.push({
               title: title.slice(0, title.length/2),
               subTitle: title.split('[').splice(1, 1).length !== 0 ? `[${title.split('[').splice(1, 1)}` : '',
@@ -150,10 +150,11 @@ export default {
   cursor: pointer;
 }
 .inputStyle {
+  margin-left: 57.5%;
   width: 30%;
   position: absolute;
   margin-top: -62px;
-  margin-left: 13.8%;
-  z-index: 2;
+  z-index: 1;
+  float: right;
 }
 </style>
