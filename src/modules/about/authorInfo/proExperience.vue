@@ -10,19 +10,34 @@
       el-row.secondLine
         span.left {{item.position}}
         span.right {{item.duration}}
-      p(style="text-align:left") Project Description:
-        span.left(style="text-align:justify; margin-top:10px; margin-bottom: 10px") {{item.desc}}
+      p(style="text-align:left;") Project Description:
+        span.left(style="text-align:justify; margin-top:10px; margin-bottom: 10px; color: #888; font-size: 14px;") {{item.desc}}
       br
       p(style="text-align:left") Contribution
       ul.thirdLine
         li(v-for="(item2, index2) in item.list", :key="index2", style="margin-bottom: 5px") {{item2}}
+      br
+      hr.hrSt(v-if="index !== data.length - 1")
+      br
 </template>
 <script>
 export default {
   data () {
     return {
       data: [
-        { project: 'Insurance Non-auto Core System',
+        {
+          project: 'FMCG Marketing System',
+          location: 'SiChuan, China',
+          position: 'Front-end Developer',
+          duration: '2019.04 to now',
+          desc: 'One of the most important marketing system of Chinese top line fast moving consumer goods firm. Which contains a mutit-channel selling rewards plan system',
+          list: [
+            'Mainly responsible for front-end program refactoring and developing',
+            'Utilising VUE, JS, Element-UI, Echarts, etc.'
+          ]
+        },
+        {
+          project: 'Insurance Non-auto Core System',
           location: 'Shanghai, China',
           position: 'Workbench Front-end Leader & Developer',
           duration: '2018.04 – 2019.04',
@@ -44,15 +59,18 @@ export default {
 </script>
 <style scoped>
 .firstLine {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 30px;
 }
 .secondLine {
   font-style: italic;
   font-size: 14px;
+  color: #888;
 }
 .thirdLine {
   text-align:left;
   line-height:20px;
   font-size: 14px;
+  color: #888;
 }
 </style>

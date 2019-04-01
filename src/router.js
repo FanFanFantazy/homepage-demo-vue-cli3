@@ -34,24 +34,24 @@ export default new Router({
       name: 'NerdHub',
       component: Layout,
       children: [{
-          path: 'option',
+          path: 'option1',
           name: 'Option1',
           component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
         },
         {
-          path: 'option',
+          path: 'option2',
           name: 'Option2',
           component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
         },
         {
-          path: 'option',
+          path: 'option2',
           name: 'Option3',
           component: {
             template: '<router-view/>',
           },
           children: [{
-            path: 'option',
-            name: 'Option1',
+            path: 'option11',
+            name: 'Option11',
             component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
           }]
         }

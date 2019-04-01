@@ -1,7 +1,17 @@
 <template lang="pug">
   div.style
-    h1 This is an about page
+    h1 {{aboutData}}
 </template>
+<script>
+export default {
+  data () {
+    return {
+      aboutData: 'DO THE SH*T'
+    }
+  }
+}
+</script>
+
 <style scoped>
 .style {
   color:teal;

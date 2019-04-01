@@ -45,9 +45,11 @@ export default {
 <style scoped>
 .firstLine {
   font-size: 16px;
+  line-height: 30px;
 }
 .secondLine {
   font-style: italic;
   font-size: 14px;
+  color: #888;
 }
 </style>
