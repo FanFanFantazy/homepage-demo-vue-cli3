@@ -4,7 +4,7 @@
       el-header
         fanMenu
       el-main
-        router-view
+        router-view(:key ="key")
       el-footer(height="50px")
         fanFooter
   </div>
@@ -19,6 +19,11 @@ export default {
   components: {
     fanMenu,
     fanFooter
+  },
+  computed: {
+    key () {
+      return this.$route.path + Math.random()
+    }
   }
 }
 </script>

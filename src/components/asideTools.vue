@@ -2,38 +2,38 @@
   div.aside-tools
     div.tools.tools1(@mouseenter="toggleToolsInfo(true)", @mouseleave="toggleToolsInfo(false)")
       div(@click="toHome")
-        //- i.material-icons.icon.size19 grid_on
+        span.fanI.fanI-home(style="padding:0;")
         span Home
-      div(@click="handler('antiInfiltrationRule')")
-        //- i.material-icons.icon.size20 error_outline
+      div()
+        i.icon.size22(class="el-icon-refresh")
         span Refresh
-      div(@click="handler('caseLabel')")
-        //- i.material-icons.icon.size22 bookmark_border
-        span Tool1
-      div(@click="handler('caseReminder')")
-        //- i.material-icons.icon.size22 notifications_none
+      div()
+        i.icon.size22(class="el-icon-document")
+        span Wiki
+      div()
+        i.icon.size22(class="el-icon-more-outline")
         span Tool2
-      div(@click="handler('thirdPartyRating')")
-        //- i.material-icons.icon.size22 star_border
+      div()
+        i.icon.size22(class="el-icon-more-outline")
         span Tool3
-      div(@click="handler('attention')")
-        //- i.material-icons.icon.size20 favorite_border
+      div()
+        i.icon.size22(class="el-icon-more-outline")
         span Tool4
-      div(@click="handler('antiMoneyLaundering')")
-        //- i.material-icons.icon.size21 local_atm
+      div()
+        i.icon.size22(class="el-icon-more-outline")
         span Tool5
       div(@click="toAbout")
-        //- i.material-icons.icon.size22 format_list_bulleted
+        span.fanI.fanI-info(style="padding:0;")
         span About
       div(@click="backTop")
-        //- i.material-icons.icon.size22 lock_open
+        i.icon.size22(class="el-icon-arrow-up")
         span Back to Top
 </template>
 
 <script>
-
 export default {
-  components: {},
+  components: {
+  },
   data () {
     return {
       showInfo: false,
@@ -150,20 +150,8 @@ export default {
       transform: rotate(180deg);
     }
   }
-  .size19 {
-    font-size: 19px;
-  }
-  .size20 {
-    font-size: 20px;
-  }
-  .size21 {
-    font-size: 21px;
-  }
   .size22 {
     font-size: 22px;
-  }
-  .size24 {
-    font-size: 24px;
   }
 }
 </style>

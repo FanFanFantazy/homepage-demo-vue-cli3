@@ -37,6 +37,15 @@ export default {
       menuData: []
     }
   },
+  // watch: {
+  //   $route: {
+  //     handler: function(val, oldVal){
+  //       this.$router.go(0)
+  //     },
+  //     // 深度观察监听
+  //     deep: true
+  //   }
+  // },
   methods: {
     handleSelect (val, val2) {
       let pathRoad = ''

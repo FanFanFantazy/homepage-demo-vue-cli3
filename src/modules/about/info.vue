@@ -6,8 +6,11 @@
 export default {
   data () {
     return {
-      aboutData: 'DO THE SH*T'
+      aboutData: 'DO THIS SH*T'
     }
+  },
+  created () {
+    this.aboutData = this.$route.path
   }
 }
 </script>
