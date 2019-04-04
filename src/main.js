@@ -10,6 +10,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI, {
   locale
 })
+const bus = new Vue()
+Vue.prototype.bus = bus
 
 new Vue({
   router,

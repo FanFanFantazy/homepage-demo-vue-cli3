@@ -4,10 +4,10 @@
       div(@click="toHome")
         span.fanI.fanI-home(style="padding:0;")
         span Home
-      div()
+      div(@click="refreshPage")
         i.icon.size22(class="el-icon-refresh")
         span Refresh
-      div()
+      div(@click="showWiki")
         i.icon.size22(class="el-icon-document")
         span Wiki
       div()
@@ -38,8 +38,7 @@ export default {
     return {
       showInfo: false,
       anchorHide: false,
-      hasAnchor: false,
-      isProposal: false
+      wikiVisible: false
     }
   },
   mounted () {
@@ -64,13 +63,16 @@ export default {
         path: '/about/aboutInfo'
       })
     },
-    handler (dialogId) {
-      this.$store.commit('Shortcutbar/setVisible', true)
-      this.$store.commit('Shortcutbar/setShown', dialogId)
-    },
     backTop () {
       const dom = document.body || document.documentElement
       window.smoothScroll(dom, 200)
+    },
+    refreshPage () {
+      this.bus.$emit('refresh', true)
+    },
+    showWiki () {
+      this.bus.$emit('wiki', !this.wikiVisible)
+      this.wikiVisible = !this.wikiVisible
     }
   }
 }

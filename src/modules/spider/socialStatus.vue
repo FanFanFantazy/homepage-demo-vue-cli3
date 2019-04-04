@@ -47,6 +47,11 @@ export default {
   created () {
     this.handleSelect('jordan')
   },
+  mounted () {
+    this.bus.$off('refresh').bus.$on('refresh', (result) => {
+      this.searchInfo()
+    });
+  },
   beforeDestroy() {
     this.listAry = []
     arr = []

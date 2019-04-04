@@ -5,6 +5,7 @@
         fanMenu
       el-main(style="width:90%;min-height:700px")
         router-view(:key ="key")
+        searchTips
         asideTools
       el-footer
         fanFooter
@@ -15,13 +16,15 @@
 import fanFooter from '@/components/footer.vue'
 import fanMenu from '@/components/header.vue'
 import asideTools from '@/components/asideTools.vue'
+import searchTips from '@/components/searchTips.vue'
 
 export default {
   name: 'home',
   components: {
     fanMenu,
     fanFooter,
-    asideTools
+    asideTools,
+    searchTips
   },
   computed: {
     key () {
