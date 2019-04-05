@@ -4,7 +4,8 @@
       el-header
         fanMenu
       el-main
-        img(src="./homeBG.jpg", style="width: 100%;")
+        div(style="min-height:680px; backgroud-color:#000")
+          img(src="./homeBG.jpg", style="width: 100%;")
       el-footer
         fanFooter
   </div>

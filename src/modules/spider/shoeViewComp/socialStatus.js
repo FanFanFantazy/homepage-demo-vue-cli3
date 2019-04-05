@@ -1,5 +1,5 @@
 export default {
-  title: 'Search Tips - DeedStock.com',
+  title: 'Search Tips - SocialStatus.com',
   tips: [
     'Pls only input lower-case-letter',
     "Use '-' to replace space and symbols, E.g. 'COMME DES GARÇONS | PLAY' to 'comme-des-garcons-play', 'FXXKING RABBITS' to 'fxxking-rabbits'",

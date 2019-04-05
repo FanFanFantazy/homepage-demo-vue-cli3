@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   transition(name="custom-classes-transition", enter-active-class="animated zoomInDown", leave-active-class="animated zoomOut")
-    div.tipholder(v-if="!show")
+    div.tipholder(v-if="!show", @click="controlWiki(true)")
   transition(name="custom-classes-transition", enter-active-class="animated zoomInDown", leave-active-class="animated zoomOutUp")
     div.tips(v-if="show")
       div(v-show = "!showCategory")
@@ -10,13 +10,17 @@ div
       div(v-show = "showCategory")
         el-col.colStyle(v-for="(item, index) in category" :key="index" :span="8")
           p {{item}}
-      el-button.buttonStyle(size="mini", @click="changeContent", :disabled="title===''") {{ showCategory ? buttonText[1] : buttonText[0]}}
+      el-button.buttonStyle(v-if="!showCategory", size="mini", @click="changeContent", :disabled="title===''", key="button1") {{buttonText[0]}}
+      el-button.buttonStyle(v-else, size="mini", @click="changeContent", :disabled="title===''", key="button2") {{buttonText[1]}}
+      div.iconStyle
+        i(@click="controlWiki(false)", class="el-icon-caret-top", style="width: 100%")
 </template>
 
 <script>
 // eslint-disable-next-line
 import animate from 'animate.css'
 import SocialStatus from '@/modules/spider/shoeViewComp/socialStatus.js'
+import DeedStock from '@/modules/spider/shoeViewComp/deedStock.js'
 
 export default {
   props: ['menuTitle'],
@@ -27,13 +31,15 @@ export default {
       tips: [],
       category: [],
       current: '',
-      sipders: ['DeedStock', 'SocialStatus'],
       showCategory: false,
       buttonText: ['SEE ALL', 'TO TIPS']
     }
   },
-  computed: {
-
+  watch: {
+    $route (route) {
+      this.controlWiki(false)
+      this.showCategory = false
+    }
   },
   mounted () {
     this.bus.$off('wiki').bus.$on('wiki', (result) => {
@@ -47,6 +53,10 @@ export default {
         this.title = SocialStatus.title
         this.tips = SocialStatus.tips
         this.category = SocialStatus.category
+      } else if (this.$route.name.replace(' ', '') === 'DeedStock') {
+        this.title = DeedStock.title
+        this.tips = DeedStock.tips
+        this.category = DeedStock.category
       } else {
         this.title = ''
         this.tips = []
@@ -55,6 +65,10 @@ export default {
     },
     changeContent () {
       this.showCategory = !this.showCategory
+    },
+    controlWiki (val) {
+      this.bus.$emit('wiki', val)
+      this.bus.$emit('resetWiki', val)
     }
   }
 }
@@ -93,6 +107,7 @@ export default {
   border-top-right-radius: initial;
   border-top-left-radius: initial;
   opacity: 0.5;
+  cursor: pointer;
 }
 .titleStyle {
   font-size: 14px;
@@ -114,16 +129,20 @@ export default {
   border: 0px solid #DCDFE6;
   color: #888;
   margin-top:20px;
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
-.buttonStyle :hover {
-  color: #fff;
+.el-button.el-button--default:hover {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :active {
-  color: #fff
+
+.el-button.el-button--default:focus {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :focus {
-  color: #fff
+.el-button.is-disabled {
+  color: #666 !important;
+  background-color: #555 !important;
 }
 .colStyle {
   height: 55px;
@@ -132,5 +151,20 @@ export default {
   text-align: start;
   padding-left: 20px;
   padding-right: 0px;
+}
+.iconStyle {
+  display: inline-block;
+  width: 100%;
+  font-size: 11px;
+  background-color: #333;
+  border: 0px solid #DCDFE6;
+  color: #888;
+  margin-top:10px;
+  margin-bottom:0px;
+  cursor: pointer;
+}
+.iconStyle :hover {
+  background-color: #888;
+  color: #fff;
 }
 </style>

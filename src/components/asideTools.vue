@@ -43,6 +43,9 @@ export default {
   },
   mounted () {
     this.anchorHide = false
+    this.bus.$off('resetWiki').bus.$on('resetWiki', (result) => {
+      this.wikiVisible = result
+    })
   },
   watch: {
     $route (route) {
@@ -137,9 +140,9 @@ export default {
         line-height: 24px;
       }
     }
-    hr {
-      margin: 8px 4px;
-    }
+    // hr {
+    //   margin: 8px 4px;
+    // }
   }
   > div:nth-of-type(2) {
     width: 40px;

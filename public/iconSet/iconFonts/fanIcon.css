@@ -1,15 +1,15 @@
 @font-face {
   font-family: 'fanIcon';
-  src:  url('fonts/fanIcon.eot?twx45m');
-  src:  url('fonts/fanIcon.eot?twx45m#iefix') format('embedded-opentype'),
-    url('fonts/fanIcon.ttf?twx45m') format('truetype'),
-    url('fonts/fanIcon.woff?twx45m') format('woff'),
-    url('fonts/fanIcon.svg?twx45m#fanIcon') format('svg');
+  src:  url('fanIcon.eot?twx45m');
+  src:  url('fanIcon.eot?twx45m#iefix') format('embedded-opentype'),
+    url('fanIcon.ttf?twx45m') format('truetype'),
+    url('fanIcon.woff?twx45m') format('woff'),
+    url('fanIcon.svg?twx45m#fanIcon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.fanI {
+[class^="fanI-"], [class*=" fanI-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'fanIcon' !important;
   font-weight: normal;
