@@ -1,8 +1,6 @@
 <template lang="pug">
   div
-    el-row.inputStyle
-      el-input(v-model="inputVal", size="mini", placeholder="jordan", clearable, @keyup.enter.native="searchInfo")
-        el-button(slot="append", @click="searchInfo") Search
+    shoeSearch(@searchInfo='handleSelect')
     el-row(:gutter="20")
       el-col(v-for="(item, index2) in listAry", :key="item.id", :span="6")
         el-card.cardStyle
@@ -23,6 +21,7 @@
 
 <script>
 import shoeDialog from './shoeViewComp/shoeDialog.vue'
+import shoeSearch from './shoeViewComp/shoeSearch.vue'
 import _ from 'lodash'
 /* eslint-disable */
 let request = require('request')
@@ -36,22 +35,14 @@ export default {
   },
   components: {
     shoeDialog,
+    shoeSearch
   },
   data () {
     return {
       listAry: [],
-      inputVal: 'jordan',
       visibleVal: false,
       diaInfro: {}
     }
-  },
-  created () {
-    this.handleSelect('jordan')
-  },
-  mounted () {
-    this.bus.$off('refresh').bus.$on('refresh', (result) => {
-      this.searchInfo()
-    });
   },
   beforeDestroy() {
     this.listAry = []
@@ -67,9 +58,6 @@ export default {
     },
     jumpToPage (val) {
       window.open(val)
-    },
-    searchInfo () {
-      this.handleSelect(this.inputVal)
     },
     handleSelect (val) {
       val = val === '' ? 'jordan' : val
@@ -153,13 +141,5 @@ export default {
   height: 95px;
   display: block;
   cursor: pointer;
-}
-.inputStyle {
-  margin-left: 57.5%;
-  width: 30%;
-  position: absolute;
-  margin-top: -62px;
-  z-index: 1;
-  float: right;
 }
 </style>

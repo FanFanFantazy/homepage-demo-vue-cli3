@@ -7,7 +7,7 @@ div
       div(v-show = "!showCategory")
         p.titleStyle {{title}}
         p.tipStyle(v-for="(item, index) in tips", :key="index") {{`${index + 1}) ${item}`}}
-      div(v-show = "showCategory")
+      div(v-show = "showCategory", style="margin-top:10px")
         el-col.colStyle(v-for="(item, index) in category" :key="index" :span="8")
           p {{item}}
       el-button.buttonStyle(v-if="!showCategory", size="mini", @click="changeContent", :disabled="title===''", key="button1") {{buttonText[0]}}
@@ -145,12 +145,13 @@ export default {
   background-color: #555 !important;
 }
 .colStyle {
-  height: 55px;
+  height: 50px;
   font-size: 12px;
   color: #999;
   text-align: start;
   padding-left: 20px;
   padding-right: 0px;
+  overflow: hidden;
 }
 .iconStyle {
   display: inline-block;
