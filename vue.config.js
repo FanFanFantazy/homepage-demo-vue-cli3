@@ -23,24 +23,24 @@ module.exports = {
     modules: false // 启用 CSS modules for all css / pre-processor files.
   },
   // 反向代理
-  // devServer: {
-  //   // 环境配置
-  //   host: '192.168.1.53',
-  //   port: 8080,
-  //   https: false,
-  //   hotOnly: false,
-  //   open: true, //配置自动启动浏览器
-  //   proxy: {
-  //     // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
-  //     // '/api': {
-  //     //   target: 'http://192.168.1.248:9888',
-  //     //   // target: 'http://192.168.1.4:8999',
-  //     //   pathRewrite: {
-  //     //     '^/api': '/api'
-  //     //   }
-  //     // }
-  //   }
-  // },
+  devServer: {
+    // 环境配置
+    // host: '192.168.1.53',
+    // port: 8080,
+    // https: false,
+    // hotOnly: false,
+    open: true // 配置自动启动浏览器
+    // proxy: {
+    //   // 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
+    //   // '/api': {
+    //   //   target: 'http://192.168.1.248:9888',
+    //   //   // target: 'http://192.168.1.4:8999',
+    //   //   pathRewrite: {
+    //   //     '^/api': '/api'
+    //   //   }
+    //   // }
+    // }
+  },
   pluginOptions: {
     // 第三方插件配置
     // ...
@@ -55,7 +55,7 @@ module.exports = {
     }).end()
   },
   configureWebpack: (config) => {
-    config.entry = ['babel-polyfill', './src/main.js']
+    // config.entry = ['babel-polyfill', './src/main.js']
     if (process.env.NODE_ENV === 'production') {
       config.optimization = {
         runtimeChunk: {

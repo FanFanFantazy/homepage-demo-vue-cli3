@@ -78,7 +78,7 @@ export default {
         url: `${baseUrl}/collections/sneakers/${val}`,
         method: 'GET',
         headers: {
-          'User-Agent': 'Chrome/71.0.3578.98'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0 Chrome/71.0.3578.98'
         }
       }, function (err, res) {
         loading.close();

@@ -193,6 +193,7 @@ export default {
     background-color: #2b2b2b !important;
     border-color: #222;
     border-width: 4px;
+    overflow: hidden;
   }
   .cell {
     padding-left: 0px, 5px, 0px, 5px;
