@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   lintOnSave: true, // 是否在保存的时候检查
-  productionSourceMap: true, // 生产环境是否生成 sourceMap 文件
+  productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
   css: {
     extract: true, // 是否使用css分离插件 ExtractTextPlugin
     sourceMap: false, // 开启 CSS source maps
@@ -45,48 +45,49 @@ module.exports = {
     // 第三方插件配置
     // ...
   },
-  runtimeCompiler: true
-  // configureWebpack: (config) => {
-  //   config.entry = ['babel-polyfill', './src/main.js'];
-  //   if (process.env.NODE_ENV === 'production') {
-  //     config.optimization = {
-  //       runtimeChunk: {
-  //         name: 'manifest',
-  //       },
-  //       splitChunks: {
-  //         chunks: 'all',
-  //         cacheGroups: {
-  //           libs: {
-  //             name: 'chunk-libs',
-  //             test: /[\\/]node_modules[\\/]/,
-  //             priority: 10,
-  //             chunks: 'initial', // 只打包初始时依赖的第三方
-  //           },
-  //           lodash: {
-  //             name: 'chunk-lodash',
-  //             test: /[\\/]node_modules[\\/]lodash[\\/]/,
-  //             priority: 20,
-  //           },
-  //           echarts: {
-  //             name: 'chunk-echarts',
-  //             test: /[\\/]node_modules[\\/]echarts[\\/]/,
-  //             priority: 20,
-  //           },
-  //           elementUI: {
-  //             name: 'chunk-elementui', // 单独将 elementUI 拆包
-  //             priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-  //             test: /[\\/]node_modules[\\/]element-ui[\\/]/,
-  //           },
-  //           commons: {
-  //             name: 'chunk-commons',
-  //             test: resolve('src/components'), // 可自定义拓展你的规则
-  //             minChunks: 3, // 最小公用次数
-  //             priority: 5,
-  //             reuseExistingChunk: true,
-  //           },
-  //         },
-  //       },
-  //     };
-  //   }
-  // },
+  runtimeCompiler: true,
+  chainWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      config.plugin('webpack-bundle-analyzer').use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+    }
+    config.module.rule('images').use('image-webpack-loader').loader('image-webpack-loader').options({
+      bypassOnDebug: true
+    }).end()
+  },
+  configureWebpack: (config) => {
+    config.entry = ['babel-polyfill', './src/main.js']
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization = {
+        runtimeChunk: {
+          name: 'manifest'
+        },
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            libs: {
+              name: 'chunk-libs',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 10,
+              chunks: 'initial' // 只打包初始时依赖的第三方
+            },
+            lodash: {
+              name: 'chunk-lodash',
+              test: /[\\/]node_modules[\\/]lodash[\\/]/,
+              priority: 20
+            },
+            echarts: {
+              name: 'chunk-echarts',
+              test: /[\\/]node_modules[\\/]echarts[\\/]/,
+              priority: 20
+            },
+            elementUI: {
+              name: 'chunk-elementui', // 单独将 elementUI 拆包
+              priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+              test: /[\\/]node_modules[\\/]element-ui[\\/]/
+            }
+          }
+        }
+      }
+    }
+  }
 }

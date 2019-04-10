@@ -36,7 +36,7 @@ export default new Router({
       children: [{
           path: 'option1',
           name: 'Option1',
-          component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
+          component: () => import( /* webpackChunkName: "about" */ './modules/nerdhub/analysisXLS.vue')
         },
         {
           path: 'option2',
