@@ -7,11 +7,11 @@ div
       div(v-show = "!showCategory")
         p.titleStyle {{title}}
         p.tipStyle(v-for="(item, index) in tips", :key="index") {{`${index + 1}) ${item}`}}
-      div(v-show = "showCategory", style="margin-top:10px")
+      div(v-show = "showCategory && category.length !== 0", style="margin-top:10px")
         el-col.colStyle(v-for="(item, index) in category" :key="index" :span="8")
           p {{item}}
-      el-button.buttonStyle(v-if="!showCategory", size="mini", @click="changeContent", :disabled="title===''", key="button1") {{buttonText[0]}}
-      el-button.buttonStyle(v-else, size="mini", @click="changeContent", :disabled="title===''", key="button2") {{buttonText[1]}}
+      el-button.buttonStyle(v-if="!showCategory && category.length !== 0", size="mini", @click="changeContent", :disabled="title===''", key="button1") {{buttonText[0]}}
+      el-button.buttonStyle(v-else-if="showCategory && category.length !== 0", size="mini", @click="changeContent", :disabled="title===''", key="button2") {{buttonText[1]}}
       div.iconStyle
         i(@click="controlWiki(false)", class="el-icon-caret-top", style="width: 100%")
 </template>
@@ -21,6 +21,7 @@ div
 import animate from 'animate.css'
 import SocialStatus from '@/modules/spider/shoeViewComp/socialStatus.js'
 import DeedStock from '@/modules/spider/shoeViewComp/deedStock.js'
+import Analysis from '@/modules/nerdhub/nerdComp/analysis.js'
 
 export default {
   props: ['menuTitle'],
@@ -57,6 +58,10 @@ export default {
         this.title = DeedStock.title
         this.tips = DeedStock.tips
         this.category = DeedStock.category
+      } else if (this.$route.name.replace(' ', '') === 'ExcelAnalyser') {
+        this.title = Analysis.title
+        this.tips = Analysis.tips
+        this.category = Analysis.category
       } else {
         this.title = ''
         this.tips = []

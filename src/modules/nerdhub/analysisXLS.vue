@@ -1,12 +1,15 @@
 <template lang="pug">
   div
-    el-row(:gutter="20")
+    el-row(:gutter="20", style="height: 90px; background-color:#2b2b2b; padding-top:10px; margin:0px")
       el-col(:span="6")
         el-upload(ref="upload", accept=".xls,.xlsx", action="", :on-change="upload", :limit="1"
         :show-file-list="true", :auto-upload="false" class="el-upload", :on-remove="clearList")
           el-button.buttonStyle(slot="trigger", size="mini") Select Files
-      el-col(:span="6")
+      el-col(:span="4")
         el-button.buttonStyle(size="mini", @click="generateNewFile") Generate
+      el-col(:span="8")
+        el-input(size="mini", v-model="inputVal", placeholder="key-word")
+          el-button(slot="append", @click="searchInfo") Search
     el-row(style="margin-top:10px")
       el-table(:data="tableData", style="width: 100%", size="mini", border, tooltip-effect="dark")
         el-table-column(:label="item", :prop="item", v-for='(item, index) in colSet', :key="index", :show-overflow-tooltip="true")
@@ -15,12 +18,14 @@
               span {{scope.row[item]}}
             el-input(v-show="`${scope.$index}${index}` === curCell", v-model="scope.row[item]", style="overflow:hidden;", size="mini", @blur="curCell = ''", :id="`${scope.$index}${index}`")
       .pagination-box
-        el-pagination(v-if="tableData.length > 0", layout="prev, pager, next" :total="totalPages", @current-change="handleCurrentChange")
+        el-pagination(v-if="tableData.length > 0", layout="prev, pager, next" :total="totalPages", :current-page.sync="curPage"
+        @current-change="handleCurrentChange")
     br
     br
 </template>
 <script>
 import XLSX from 'xlsx'
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -28,11 +33,53 @@ export default {
       tableData: [],
       colSet: [],
       totalData: [],
+      copyTotalData: [],
+      curPage: 1,
       totalPages: 0,
-      curCell: ''
+      curCell: '',
+      inputVal: ''
     }
   },
+  mounted () {
+    this.bus.$off('refresh').bus.$on('refresh', (result) => {
+      this.curPage = 1
+      this.handleCurrentChange(1)
+      this.totalData = _.cloneDeep(this.copyTotalData)
+      this.tableData = this.totalData[0]
+      this.totalPages = (this.copyTotalData.length - 1) * 10 + _.last(this.copyTotalData).length
+    })
+  },
   methods: {
+    searchInfo () {
+      this.tableData = []
+      this.totalData = []
+      const ws = []
+      this.copyTotalData.forEach(table => {
+        table.forEach(row => {
+          for (let i = 0; i < Object.keys(row).length; i++) {
+            if (JSON.stringify(row[Object.keys(row)[i]]).indexOf(this.inputVal) > -1) {
+              ws.push(row)
+              break
+            }
+          }
+        })
+      })
+      for (let i = 0; i < ws.length / 10; i++) {
+        this.totalData[i] = []
+        if (i < ws.length / 10 - 1) {
+          for (let j = 0; j < 10; j++) {
+            this.totalData[i].push(this.restructAry(ws[i * 10 + j]))
+          }
+        } else {
+          for (let j = 0; j < (ws.length % 10 === 0 ? 10 : ws.length % 10); j++) {
+            this.totalData[i].push(this.restructAry(ws[i * 10 + j]))
+          }
+        }
+      }
+      this.tableData = this.totalData[0] === undefined ? [] : this.totalData[0]
+      this.curPage = 1
+      this.totalPages = ws.length
+    },
     selectCell (item, index) {
       this.curCell = `${item}${index}`
       const that = this
@@ -98,21 +145,22 @@ export default {
       document.body.removeChild(link)
     },
     generateNewFile () {
-      const outputFile = []
-      this.totalData.forEach(element => {
-        element.forEach(element2 => {
-          outputFile.push(element2)
+      if (this.tableData.length > 0) {
+        const outputFile = []
+        this.totalData.forEach(element => {
+          element.forEach(element2 => {
+            outputFile.push(element2)
+          })
         })
-      })
-      this.JSONToExcelConvertor(outputFile, 'newExcel')
-    },
-    clearList (file, fileList) {
-      if (fileList.length === 0) {
-        this.totalData = []
-        this.tableData = []
-        this.totalPages = 0
-        this.colSet = []
+        this.JSONToExcelConvertor(outputFile, 'newExcel')
       }
+    },
+    clearList () {
+      this.totalData = []
+      this.tableData = []
+      this.copyTotalData = []
+      this.totalPages = 0
+      this.colSet = []
     },
     handleCurrentChange (val) {
       this.tableData = this.totalData[val - 1]
@@ -150,11 +198,12 @@ export default {
                 that.totalData[i].push(this.restructAry(ws[i * 10 + j]))
               }
             } else {
-              for (let j = 0; j < ws.length % 10; j++) {
+              for (let j = 0; j < (ws.length % 10 === 0 ? 10 : ws.length % 10); j++) {
                 that.totalData[i].push(this.restructAry(ws[i * 10 + j]))
               }
             }
           }
+          that.copyTotalData = _.cloneDeep(that.totalData)
           that.tableData = that.totalData[0]
           that.colSet = Object.keys(that.tableData[0])
           that.totalPages = ws.length
@@ -186,6 +235,7 @@ export default {
     background-color: #2b2b2b !important;
     border-color: #222;
     border-width: 4px;
+    line-height: 50px;
   }
 
   td {
@@ -196,8 +246,8 @@ export default {
     overflow: hidden;
   }
   .cell {
-    padding-left: 0px, 5px, 0px, 5px;
-    margin: 0px;
+    padding-left: 5px, 5px, 5px, 5px;
+    line-height: 26px;
   }
 }
 .pagination-box {
@@ -250,7 +300,8 @@ export default {
 <style lang='scss' scoped>
 .buttonStyle {
   width: 100%;
-  background-color: #2b2b2b;
+  height: 28px;
+  background-color: #222;
   border: 0px solid #DCDFE6;
   color: #888;
   text-align: left;

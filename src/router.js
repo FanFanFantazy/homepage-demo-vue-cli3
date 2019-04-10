@@ -34,8 +34,8 @@ export default new Router({
       name: 'NerdHub',
       component: Layout,
       children: [{
-          path: 'option1',
-          name: 'Option1',
+          path: 'analysis',
+          name: 'Excel Analyser',
           component: () => import( /* webpackChunkName: "about" */ './modules/nerdhub/analysisXLS.vue')
         },
         {
