@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from './views/Layout.vue'
-import Layout2 from './views/Layout2.vue'
+// import Layout2 from './views/Layout2.vue'
 
 Vue.use(Router)
 
@@ -36,16 +36,23 @@ export default new Router({
       children: [{
           path: 'analysisXls',
           name: 'Excel Analyser',
+          meta: {
+            type: '2'
+          },
           component: () => import( /* webpackChunkName: "analysisXls" */ './modules/nerdhub/analysisXls.vue')
         },
         {
           path: 'analysisImg',
           name: 'Image Analyser',
+          meta: {
+            type: '2'
+          },
           component: () => import( /* webpackChunkName: "analysisImg" */ './modules/nerdhub/analysisImg.vue')
         },
         {
           path: 'option2',
           name: 'Option3',
+          type: '2',
           component: {
             template: '<router-view/>',
           },
@@ -60,7 +67,7 @@ export default new Router({
     {
       path: '/about',
       name: 'About',
-      component: Layout2,
+      component: Layout,
       children: [{
           path: 'aboutInfo',
           name: 'Info',

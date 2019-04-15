@@ -17,7 +17,7 @@
             el-input(readonly, v-model="coordinate.color", size="mini", placeholder="colour")
           el-row.rowStyle
             el-col(:span="6")
-              el-card.appendCard(:style="'background-color:' + coordinate.color + '; border-color:' + reverseColor(coordinate.color)")
+              el-card.appendCard(v-bind:style="'background-color:' + coordinate.color + '; border-color:' + reverseColor(coordinate.color)")
             el-col(:span="18")
               el-row.rowStyle(style="text-align: left; margin-top:0px")
                 span(style="margin-right:10px; font-size: 12px;") Show White
@@ -46,6 +46,10 @@ export default {
     }
   },
   mounted () {
+    this.bus.$off('refresh').bus.$on('refresh', (result) => {
+      this.clearList()
+      this.$refs.upload.clearFiles()
+    })
   },
   created () {
   },
@@ -64,6 +68,7 @@ export default {
         z: '',
         color: ''
       }
+      this.displayWhite = false
     },
     showDataOnBoard (val) {
       this.coordinate = {

@@ -3,10 +3,10 @@
     el-container.is-vertical.page
       el-header
         fanMenu
-      el-main(style="width:90%;min-height:700px")
+      el-main(v-bind:style="$route.meta.type === '2' ? 'width:90%;min-height:700px' : 'width:100%;min-height:700px'")
         router-view(:key ="key")
-        searchTips
-        asideTools
+        searchTips(v-if = "$route.meta.type === '2'")
+        asideTools(v-if = "$route.meta.type === '2'")
       el-footer
         fanFooter
   </div>
@@ -30,6 +30,9 @@ export default {
     key () {
       return this.$route.path + Math.random()
     }
+  },
+  created () {
+    console.log(this.$route.meta.type)
   }
 }
 </script>
