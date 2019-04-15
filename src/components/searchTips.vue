@@ -21,7 +21,8 @@ div
 import animate from 'animate.css'
 import SocialStatus from '@/modules/spider/shoeViewComp/socialStatus.js'
 import DeedStock from '@/modules/spider/shoeViewComp/deedStock.js'
-import Analysis from '@/modules/nerdhub/nerdComp/analysis.js'
+import ExcelAnalyser from '@/modules/nerdhub/nerdComp/excelAnalyser.js'
+import ImageAnalyser from '@/modules/nerdhub/nerdComp/imageAnalyser.js'
 
 export default {
   props: ['menuTitle'],
@@ -59,9 +60,13 @@ export default {
         this.tips = DeedStock.tips
         this.category = DeedStock.category
       } else if (this.$route.name.replace(' ', '') === 'ExcelAnalyser') {
-        this.title = Analysis.title
-        this.tips = Analysis.tips
-        this.category = Analysis.category
+        this.title = ExcelAnalyser.title
+        this.tips = ExcelAnalyser.tips
+        this.category = ExcelAnalyser.category
+      } else if (this.$route.name.replace(' ', '') === 'ImageAnalyser') {
+        this.title = ImageAnalyser.title
+        this.tips = ImageAnalyser.tips
+        this.category = ImageAnalyser.category
       } else {
         this.title = ''
         this.tips = []

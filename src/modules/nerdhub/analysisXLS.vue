@@ -2,7 +2,7 @@
   div
     el-row(:gutter="20", style="height: 90px; background-color:#2b2b2b; padding-top:10px; margin:0px")
       el-col(:span="6")
-        el-upload(ref="upload", accept=".xls,.xlsx", action="", :on-change="upload", :limit="1"
+        el-upload(ref="upload", accept=".xls,.xlsx", action="", :on-change="upload",
         :show-file-list="true", :auto-upload="false" class="el-upload", :on-remove="clearList")
           el-button.buttonStyle(slot="trigger", size="mini") Select Files
       el-col(:span="4")
@@ -165,7 +165,8 @@ export default {
     handleCurrentChange (val) {
       this.tableData = this.totalData[val - 1]
     },
-    upload (file) {
+    upload (file, fileList) {
+      fileList.splice(0, fileList.length > 1 ? 1 : 0)
       this.readExcel({ 0: file.raw })
     },
     restructAry (obj) {

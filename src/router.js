@@ -34,14 +34,14 @@ export default new Router({
       name: 'NerdHub',
       component: Layout,
       children: [{
-          path: 'analysis',
+          path: 'analysisXls',
           name: 'Excel Analyser',
-          component: () => import( /* webpackChunkName: "about" */ './modules/nerdhub/analysisXLS.vue')
+          component: () => import( /* webpackChunkName: "analysisXls" */ './modules/nerdhub/analysisXls.vue')
         },
         {
-          path: 'option2',
-          name: 'Option2',
-          component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
+          path: 'analysisImg',
+          name: 'Image Analyser',
+          component: () => import( /* webpackChunkName: "analysisImg" */ './modules/nerdhub/analysisImg.vue')
         },
         {
           path: 'option2',
