@@ -1,5 +1,5 @@
 <template lang="pug">
-div(:id="chartid" :style="chartSize", @click="clickValue")
+div(:id="chartid" :style="chartSize", @mousemove="clickValue")
 </template>
 <script>
 import echarts from 'echarts'
@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     default () {
+      this.myChart = echarts.init(document.getElementById(this.chartid))
       img.src = this.chartdata
       const that = this
       img.onload = function () {
@@ -80,10 +81,24 @@ export default {
       }
     },
     drawLine (data, imgData) {
-      this.myChart = echarts.init(document.getElementById(this.chartid))
       this.myChart.setOption({
         tooltip: {
           show: false
+        },
+        toolbox: {
+          show: true,
+          right: 10,
+          top: 'bottom',
+          itemSize: 18,
+          feature: {
+            restore: {
+              title: 'Restore'
+            },
+            saveAsImage: {
+              type: 'jpeg',
+              title: 'Save'
+            }
+          }
         },
         backgroundColor: '#fff',
         xAxis3D: {
@@ -153,7 +168,7 @@ export default {
           data: data
         }]
       })
-      this.myChart.on('click', (params) => {
+      this.myChart.on('mouseover', 'series', (params) => {
         passData = params
       })
       window.addEventListener('resize', this.myChart.resize)

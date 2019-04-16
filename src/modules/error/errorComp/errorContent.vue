@@ -1,7 +1,7 @@
 <template lang="pug">
   div(class="error-page")
     div(class="text-con")
-      span(style="font-size: 200px; text-shadow: 5px 5px 0 #333, 7px 7px 0 #aaa;") {{ code }}
+      span(class="errorStyle") {{ code }}
       transition(name="custom-classes-transition", enter-active-class="animated jackInTheBox")
         p(v-show="timer") {{ desc }}
     ErrorFooter(class="back-btn-group")
@@ -35,17 +35,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.error-page{
+.error-page {
   width: 100%;
   height: 100%;
-  .text-con{
+  .text-con {
     width: 100%;
     color: #ccc;
     font-size: 24px;
     margin-top: 10%;
     text-align: center;
+    .errorStyle {
+      font-size: 200px;
+      text-shadow: 5px 5px 0 #333, 7px 7px 0 #aaa;
+      letter-spacing: 25px;
+    }
   }
-  .back-btn-group{
+  .back-btn-group {
     position: absolute;
     width: 400px;
     right: 5%;
