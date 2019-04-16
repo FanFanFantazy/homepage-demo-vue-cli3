@@ -1,9 +1,9 @@
 <template lang="pug">
   el-row(:gutter="10")
     el-col(:span="12")
-      el-button.buttonStyle(size="large" @click="backHome") Home
+      el-button.buttonStyle(size="mini" @click="backHome") Home
     el-col(:span="12")
-      el-button.buttonStyle(size="large" @click="backPrev") Last Page ({{ second }}s)
+      el-button.buttonStyle(size="mini" @click="backPrev") Last Page ({{ second }}s)
 </template>
 
 <script>
@@ -43,5 +43,18 @@ export default {
   background-color: #1f1f1f;
   border: 0px solid #DCDFE6;
   color: #888;
+}
+.el-button.el-button--default:hover {
+  color: #333 !important;
+  background-color: #888 !important;
+}
+
+.el-button.el-button--default:focus {
+  color: #333 !important;
+  background-color: #888 !important;
+}
+.el-button.is-disabled {
+  color: #666 !important;
+  background-color: #555 !important;
 }
 </style>

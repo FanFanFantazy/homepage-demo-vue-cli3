@@ -126,14 +126,6 @@ export default {
 .el-upload {
   width: 100% !important;
 }
-.el-input--mini {
-  border: none;
-}
-.el-input--mini .el-input__inner {
-  background-color: #555;
-  border: none;
-  color: #ccc;
-}
 </style>
 <style lang='scss' scoped>
 .buttonStyle {
@@ -144,14 +136,18 @@ export default {
   color: #888;
   text-align: left;
 }
-.buttonStyle :hover {
-  color: #fff;
+.el-button.el-button--default:hover {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :active {
-  color: #fff
+
+.el-button.el-button--default:focus {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :focus {
-  color: #fff
+.el-button.is-disabled {
+  color: #666 !important;
+  background-color: #555 !important;
 }
 .cardStyle {
   margin-top: 0px;

@@ -308,13 +308,17 @@ export default {
   color: #888;
   text-align: left;
 }
-.buttonStyle :hover {
-  color: #fff;
+.el-button.el-button--default:hover {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :active {
-  color: #fff
+
+.el-button.el-button--default:focus {
+  color: #333 !important;
+  background-color: #888 !important;
 }
-.buttonStyle :focus {
-  color: #fff
+.el-button.is-disabled {
+  color: #666 !important;
+  background-color: #555 !important;
 }
 </style>

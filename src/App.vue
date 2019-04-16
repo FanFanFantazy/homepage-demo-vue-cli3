@@ -25,4 +25,12 @@
   margin-bottom: 20px;
   margin-top: 30px
 }
+.el-input--mini {
+  border: none !important;
+}
+.el-input--mini .el-input__inner {
+  background-color: #555 !important;
+  border: none !important;
+  color: #ccc !important;
+}
 </style>
