@@ -11,7 +11,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'Home',
-      component: () => import( /* webpackChunkName: "socialStatus" */ '@/modules/homepage/homepage.vue'),
+      component: () => import( /* webpackChunkName: "homepage" */ '@/modules/homepage/homepage.vue'),
     },
     {
       path: '/spider',
@@ -76,9 +76,33 @@ export default new Router({
         {
           path: 'authorInro',
           name: 'Author',
-          component: () => import( /* webpackChunkName: "aboutInfo" */ './modules/about/author.vue')
+          component: () => import( /* webpackChunkName: "aboutAuthor" */ './modules/about/author.vue')
         },
       ]
-    }
+    },
+    {
+      path: '*',
+      name: 'error_404',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import( /* webpackChunkName: "error404" */'@/modules/error/error404.vue')
+    },
+    {
+      path: '/401',
+      name: 'error_401',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import(/* webpackChunkName: "error401" */'@/modules/error/error401.vue')
+    },
+    {
+      path: '/500',
+      name: 'error_500',
+      meta: {
+        hideInMenu: true
+      },
+      component: () => import(/* webpackChunkName: "error500" */'@/modules/error/error500.vue')
+    },
   ]
 })

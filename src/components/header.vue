@@ -2,8 +2,8 @@
   el-menu(class="el-menu-demo", mode="horizontal", @select="handleSelect"
   background-color="#545c64", text-color="#ccc", active-text-color="#ffd04b")
     template(v-for="(item, index) in menuData")
-      el-menu-item(v-if="!item.children", :index="item.path", :class="$route.name===item.name?'is-active':''") {{item.name}}
-      el-submenu(v-else :index="item.path")
+      el-menu-item(v-if="!item.children && (!item.meta || !item.meta.hideInMenu)", :index="item.path", :class="$route.name===item.name?'is-active':''") {{item.name}}
+      el-submenu(v-else-if="item.children && (!item.meta || !item.meta.hideInMenu)" :index="item.path")
         template(slot="title") {{item.name}}
         template(v-for="(item2, index2) in item.children")
           el-menu-item(v-if="!item2.children", :index="item2.path", :class="$route.name===item2.name?'is-active':''") {{item2.name}}
