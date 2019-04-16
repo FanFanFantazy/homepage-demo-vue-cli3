@@ -109,6 +109,7 @@ export default {
         excel += row2 + '</tr>'
       }
       excel += '</table>'
+      // set Excel
       var excelFile = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' xmlns='https://github.com/FanFanFantazy/homepage-demo-vue-cli3'>"
       excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">'
       excelFile += '<meta http-equiv="content-type" content="application/vnd.ms-excel'
