@@ -1,7 +1,6 @@
 <template lang="pug">
-  <div>
+  div
     p(@click="loginHomepage") login
-  </div>
 </template>
 
 <script>
