@@ -213,7 +213,7 @@ export default {
           return err
         }
       }
-      fileReader.readAsBinaryString(files[0])
+      fileReader.readAsBinaryString(files[0]) // read
     }
   }
 }

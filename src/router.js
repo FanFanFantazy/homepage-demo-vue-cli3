@@ -57,9 +57,9 @@ export default new Router({
             template: '<router-view/>',
           },
           children: [{
-            path: 'option11',
-            name: 'Option11',
-            component: () => import( /* webpackChunkName: "about" */ './modules/about/info.vue')
+            path: 'polygon',
+            name: 'Polygon',
+            component: () => import( /* webpackChunkName: "polygon" */ './modules/nerdhub/polygon.vue')
           }]
         }
       ]
