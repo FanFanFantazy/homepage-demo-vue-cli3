@@ -50,15 +50,17 @@ export default new Router({
           component: () => import( /* webpackChunkName: "analysisImg" */ './modules/nerdhub/analysisImg.vue')
         },
         {
-          path: 'option2',
-          name: 'Option3',
-          type: '2',
+          path: 'others',
+          name: 'Others',
           component: {
             template: '<router-view/>',
           },
           children: [{
             path: 'polygon',
             name: 'Polygon',
+            meta: {
+              type: '2'
+            },
             component: () => import( /* webpackChunkName: "polygon" */ './modules/nerdhub/polygon.vue')
           }]
         }
