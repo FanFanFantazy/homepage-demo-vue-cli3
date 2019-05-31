@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     el-row(:gutter="20")
-      el-col(:span="4")
+      el-col(:span="6")
         el-card.cardStyle
           el-row
             el-button.buttonStyle(@click="changeClass", size="mini" style="margin-bottom: 20px") Next
@@ -51,6 +51,10 @@ export default {
         this.className = 'shard-wrap3'
         this.backG = 'background-color: #64D6E1'
         this.name = 'VAQUITA'
+      } else if (this.className === 'shard-wrap3') {
+        this.className = 'shard-wrap4'
+        this.backG = 'background-color: rgb(253, 171, 147)'
+        this.name = 'Bactrian Camel'
       } else {
         this.className = 'shard-wrap'
         this.backG = 'background-color: #FEC54F'
@@ -87,6 +91,7 @@ export default {
   color: #fff
 }
 .cardStyle2 {
+  padding: 0px;
   width:600px;
   height:600px;
   margin-top: 0px;
@@ -143,6 +148,76 @@ body{
   height: 600px;
   transition: all 1s;
 }
+.shard-wrap4 .shard {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  transition: all 1s;
+}
+$coordinates4 : (
+  (33.3% 22.9%, 38.3% 20.3%, 43.6% 26.1%)
+  (34% 23.1%, 43.6% 26.1%, 27.4% 29.5%)
+  (27.4% 29.5%, 43.6% 26.1%, 48.3% 37.8%)
+  (28.5% 29.9%, 32.5% 41.1%, 39.5% 34.3%)
+  (28.5% 29.9%, 24.8% 37.7%, 32.5% 41.1%)
+  (27.9% 49.2%, 30.8% 62.4%, 26.3% 55.2%)
+  (28.5% 56%, 27.9% 49.2%, 33.5% 62.2%)
+  (24.8% 37.7%, 32.5% 41.1%, 28% 54.9%)
+  (32.5% 41.1%, 39.5% 34.3%, 44% 43%)
+  (39.5% 34.3%, 44% 43%, 48.3% 37.8%)
+  (43.6% 26.1%, 50.3% 23%, 59.4% 32.8%)
+  (43.6% 26.1%, 59.4% 32.8%, 48.3% 37.8%)
+  (44% 43%, 48.3% 37.8%, 47.4% 51.5%)
+  (48.3% 37.8%, 47.4% 51.5%, 53.3% 49.5%)
+  (48.3% 37.8%, 54.7% 41.6%, 53.6% 50.7%)
+  (47.4% 51.5%, 50.3% 50.5%, 49.1% 62.3%)
+  (50.9% 50.3%, 53.3% 49.5%, 52.3% 62.3%)
+  (48.3% 37.8%, 59.4% 32.8%, 58.5% 44%)
+  (59.4% 32.8%, 67% 38.3%, 58.2% 45.3%)
+  (59.1% 44.6%, 60.5% 49.3%, 67% 38.3%)
+  (67% 38.3%, 60.1% 50%, 67.3% 47%)
+  (66.7% 30.4%, 67.2% 47.7%, 71.3% 41.4%)
+  (59.4% 32.8%, 66.7% 30.4%, 67% 38.3%)
+  (66.7% 30.4%, 70.9% 32.6%, 71.9% 43.2%)
+  (66.7% 30.4%, 71% 32.7%, 74.8% 29.9%)
+  (59.4% 32.8%, 66.7% 30.4%, 62.9% 28%)
+  (62.9% 28%, 66.7% 30.4%, 73.3% 27%)
+  (66.7% 30.4%, 73.3% 27%, 75.3% 29.9%)
+  (62.9% 28%, 65.3% 24.2%, 70.9% 27.2%)
+  (66.7% 23.5%, 66.7% 27.5%, 70.9% 27.2%)
+);
+$color4 : (
+  (rgb(188, 159, 117))
+  (rgb(189, 134, 78))
+  (rgb(169, 118, 71))
+  (rgb(192, 141, 86))
+  (rgb(169, 125, 78))
+  (rgb(41, 21, 0))
+  (rgb(66, 43, 0))
+  (rgb(147, 104, 59))
+  (rgb(150, 99, 54))
+  (rgb(111, 72, 41))
+  (rgb(185, 149, 101))
+  (rgb(178, 125, 73))
+  (rgb(71, 51, 42))
+  (rgb(49, 30, 15))
+  (rgb(82, 42, 16))
+  (rgb(115, 80, 58))
+  (rgb(84, 54, 30))
+  (rgb(101,66, 46))
+  (rgb(126, 81, 48))
+  (rgb(83, 59, 49))
+  (rgb(97, 69, 47))
+  (rgb(144, 96, 50))
+  (rgb(105, 63, 23))
+  (rgb(167, 110, 65))
+  (rgb(133, 112, 81))
+  (rgb(124, 86, 49))
+  (rgb(214, 198, 175))
+  (rgb(195, 178, 148))
+  (rgb(160, 117, 85))
+  (rgb(180, 137, 82))
+);
 $coordinates1 : (
   (11.1% 81.286%,13.9% 80.286%,13.9% 74.429%)
   (9.6% 71.3%,11.2% 81.2%,13.95% 74.571%)
@@ -349,6 +424,11 @@ $color3 :(
   .shard-wrap3:nth-child(#{$i}) .shard{
     clip-path: polygon(nth($coordinates3, $i));
     background-color: nth($color3, $i);
+    transition-delay:0.03s * $i;
+  }
+  .shard-wrap4:nth-child(#{$i}) .shard{
+    clip-path: polygon(nth($coordinates4, $i));
+    background-color: nth($color4, $i);
     transition-delay:0.03s * $i;
   }
 }
