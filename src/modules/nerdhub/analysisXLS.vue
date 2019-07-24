@@ -169,6 +169,7 @@ export default {
     upload (file, fileList) {
       fileList.splice(0, fileList.length > 1 ? 1 : 0)
       this.readExcel({ 0: file.raw })
+      console.log(fileList)
     },
     restructAry (obj) {
       let output = {}
