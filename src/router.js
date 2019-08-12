@@ -62,6 +62,14 @@ export default new Router({
               type: '2'
             },
             component: () => import( /* webpackChunkName: "polygon" */ './modules/nerdhub/polygon.vue')
+          },
+          {
+            path: 'vuexNum',
+            name: 'Vuex Number',
+            meta: {
+              type: '2'
+            },
+            component: () => import( /* webpackChunkName: "vuexNum" */ './modules/nerdhub/vuexNum.vue')
           }]
         }
       ]
