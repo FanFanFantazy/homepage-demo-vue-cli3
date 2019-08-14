@@ -10,9 +10,9 @@
       div(@click="showWiki")
         i.icon.size22(class="el-icon-document")
         span Wiki
-      div()
-        i.icon.size22(class="el-icon-more-outline")
-        span Tool2
+      div(@click="toMd")
+        i.icon.size22(class="el-icon-edit-outline")
+        span Markdown
       div()
         i.icon.size22(class="el-icon-more-outline")
         span Tool3
@@ -64,6 +64,11 @@ export default {
     toAbout () {
       this.$router.push({
         path: '/about/aboutInfo'
+      })
+    },
+    toMd () {
+      this.$router.push({
+        path: '/nerdHub/others/mdEditor'
       })
     },
     backTop () {

@@ -1,17 +1,15 @@
 <template lang="pug">
-  div
-    el-row(:gutter="20")
-      el-col(:span="6")
-        el-card.cardStyle
-          el-row
-            el-button.buttonStyle(@click="changeClass", size="mini" style="margin-bottom: 20px") Next
-          el-row
-            el-button.buttonStyle(@click="autoPlay", size="mini" style="margin-bottom: 20px") {{buttonLabel}}
-      el-col(:span="10")
-        el-card.cardStyle2(:style="backG")
-          div(v-for="i in 30", :class="className")
-            div.shard
-          p.nameStyle {{name}}
+  el-row(:gutter="20", justify="center", type="flex", style="background-color: #333; width: 100%; overflow: hidden;")
+    p.nameStyle {{name}}
+    p.crStyle Designed by http://www.species-in-pieces.com
+    div.cardStyle2
+      div(v-for="i in 30", :class="className")
+        div.shard
+    div.blackBar
+      p(style="text-align: left; margin-left:30px; color:#ccc; font-size: 12px; margin-top:20px") One fragmented survival.
+    div.buttonCard
+      el-button.buttonStyle(@click="changeClass", size="mini", icon="el-icon-caret-right" :disabled="autoActive")
+      el-button.buttonStyle(@click="autoPlay", size="mini", :icon="buttonLabel")
 
 </template>
 <script>
@@ -19,22 +17,20 @@
 export default {
   data () {
     return {
-      className: 'shard-wrap',
-      backG: 'background-color: #FEC54F',
+      className: '',
       autoActive: false,
       timer: null,
-      name: 'MALAYAN TAPIR'
+      name: 'PLOY AN ANIMAL'
     }
   },
   computed: {
     buttonLabel () {
-      return this.autoActive ? 'Stop' : 'Play'
+      return this.autoActive ? 'el-icon-video-pause' : 'el-icon-video-play'
     }
   },
   mounted () {
     this.bus.$off('refresh').bus.$on('refresh', (result) => {
       this.className = 'shard-wrap'
-      this.backG = 'background-color: #FEC54F'
       this.name = 'MALAYAN TAPIR'
       this.autoActive = false
       this.timer = null
@@ -45,19 +41,15 @@ export default {
     changeClass () {
       if (this.className === 'shard-wrap') {
         this.className = 'shard-wrap2'
-        this.backG = 'background-color: #DE88AB'
         this.name = 'SOMALI OSTRICH'
       } else if (this.className === 'shard-wrap2') {
         this.className = 'shard-wrap3'
-        this.backG = 'background-color: #64D6E1'
         this.name = 'VAQUITA'
       } else if (this.className === 'shard-wrap3') {
         this.className = 'shard-wrap4'
-        this.backG = 'background-color: rgb(253, 171, 147)'
-        this.name = 'Bactrian Camel'
+        this.name = 'BACTRIAN CAMEL'
       } else {
         this.className = 'shard-wrap'
-        this.backG = 'background-color: #FEC54F'
         this.name = 'MALAYAN TAPIR'
       }
     },
@@ -84,48 +76,79 @@ export default {
 </script>
 <style scoped lang='scss'>
 .nameStyle {
-  text-align: center;
+  position: absolute;
+  top: 0%;
+  left: 5%;
   font-size: 40px;
-  font-weight: 800;
+  font-weight: 300;
   transition-delay: 0.5s;
   color: #fff
 }
+.crStyle {
+  text-align: center;
+  font-size: 12px;
+  color: #ccc;
+  left: -3.5%;
+  bottom: 28%;
+  position: absolute;
+  transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg); /* IE 9 */
+  -moz-transform: rotate(-90deg); /* Firefox */
+  -webkit-transform: rotate(-90deg); /* Safari 和 Chrome */
+  -o-transform: rotate(-90deg); /* Opera */
+}
 .cardStyle2 {
   padding: 0px;
-  width:600px;
-  height:600px;
+  width: 600px;
+  height: 590px;
   margin-top: 0px;
   margin-bottom: 0px;
   border: none;
   border-radius: 0px;
 }
-.cardStyle {
+.blackBar {
+  background-color: #222;
+  width: 450px;
+  height: 51px;
+  bottom: 0%;
+  right: 250px;
+  position: absolute;
+}
+.buttonCard {
+  text-align: left;
+  background-color: #fff;
+  width: 250px;
+  bottom: 0%;
+  right: 0%;
+  position: absolute;
   margin-top: 0px;
   margin-bottom: 0px;
-  background-color: #2b2b2b;
   border: none;
   border-radius: 0px;
 }
 .buttonStyle {
-  width: 100%;
-  height: 28px;
-  background-color: #222;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 60px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
   border: 0px solid #DCDFE6;
+  border-radius: 0px;
   color: #888;
-  text-align: left;
+  font-size: 20px;
 }
 .el-button.el-button--default:hover {
   color: #333 !important;
-  background-color: #888 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .el-button.el-button--default:focus {
   color: #333 !important;
-  background-color: #888 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 .el-button.is-disabled {
   color: #666 !important;
-  background-color: #555 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 body{
   margin:0;
@@ -422,11 +445,17 @@ $color3 :(
     transition-delay:0.03s * $i;
   }
   .shard-wrap3:nth-child(#{$i}) .shard{
+    transform: scale(1.4);
+    margin-left: 20px;
+    margin-top: 120px;
     clip-path: polygon(nth($coordinates3, $i));
     background-color: nth($color3, $i);
     transition-delay:0.03s * $i;
   }
   .shard-wrap4:nth-child(#{$i}) .shard{
+    transform: scale(1.5);
+    margin-left: 30px;
+    margin-top: 100px;
     clip-path: polygon(nth($coordinates4, $i));
     background-color: nth($color4, $i);
     transition-delay:0.03s * $i;

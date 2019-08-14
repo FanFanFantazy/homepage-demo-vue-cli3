@@ -50,19 +50,20 @@ export default new Router({
           component: () => import( /* webpackChunkName: "analysisImg" */ './modules/nerdhub/analysisImg.vue')
         },
         {
+          path: 'polygon',
+          name: 'Polygon',
+          meta: {
+            type: '2'
+          },
+          component: () => import( /* webpackChunkName: "polygon" */ './modules/nerdhub/polygon.vue')
+        },
+        {
           path: 'others',
           name: 'Others',
           component: {
             template: '<router-view/>',
           },
-          children: [{
-            path: 'polygon',
-            name: 'Polygon',
-            meta: {
-              type: '2'
-            },
-            component: () => import( /* webpackChunkName: "polygon" */ './modules/nerdhub/polygon.vue')
-          },
+          children: [
           {
             path: 'vuexNum',
             name: 'Vuex Number',
@@ -70,6 +71,14 @@ export default new Router({
               type: '2'
             },
             component: () => import( /* webpackChunkName: "vuexNum" */ './modules/nerdhub/vuexNum.vue')
+          },
+          {
+            path: 'mdEditor',
+            name: 'Markdown Editor',
+            meta: {
+              type: '2'
+            },
+            component: () => import( /* webpackChunkName: "mdEditor" */ './modules/nerdhub/mdEditor.vue')
           }]
         }
       ]

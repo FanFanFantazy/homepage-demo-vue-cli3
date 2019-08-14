@@ -6,9 +6,9 @@ import echarts from 'echarts'
 import 'echarts-gl'
 
 let passData = null
-var img = new Image()
-var canvas = document.createElement('canvas')
-var ctx = canvas.getContext('2d')
+let img = new Image()
+let canvas = document.createElement('canvas')
+let ctx = canvas.getContext('2d')
 
 export default {
   props: {
@@ -35,7 +35,7 @@ export default {
   },
   watch: {
     chartdata (val, oldValue) {
-      if (val === null || val === '') {
+      if (!val) {
         window.removeEventListener('resize', this.myChart.resize)
         if (this.myChart) {
           this.myChart.dispose() // dispose the Echart
@@ -53,6 +53,7 @@ export default {
   methods: {
     default () {
       this.myChart = echarts.init(document.getElementById(this.chartid))
+      this.showLoading()
       img.src = this.chartdata
       const that = this
       img.onload = function () {
@@ -120,14 +121,14 @@ export default {
           postEffect: {
             enable: true,
             SSAO: {
-              enable: true
+              enable: false
             }
           },
           axisLabel: {
             show: false
           },
           splitLine: {
-            show: true
+            show: false
           },
           axisTick: {
             show: false
@@ -138,7 +139,7 @@ export default {
           boxDepth: 120,
           light: {
             main: {
-              shadow: true,
+              shadow: false,
               intensity: 0.1
             },
             ambientCubemap: {
@@ -171,10 +172,21 @@ export default {
       this.myChart.on('mouseover', 'series', (params) => {
         passData = params
       })
+      this.myChart.hideLoading()
       window.addEventListener('resize', this.myChart.resize)
     },
+    showLoading () {
+      this.myChart.showLoading({
+        text: 'Loading...',
+        x: 'center',
+        y: 'center',
+        color: '#005bac',
+        textColor: '#FFFFFF',
+        maskColor: 'rgba(0, 0, 0, 0.9)'
+      })
+    },
     clickValue () {
-      if (passData !== undefined && passData !== null && passData !== '') {
+      if (passData) {
         this.$emit('clickbar', passData)
       }
     }

@@ -184,7 +184,7 @@ export default {
       if (files.length <= 0) { // if unnamed file
         return false
       } else if (!/\.(xls|xlsx)$/.test(files[0].name.toLowerCase())) {
-        this.$Message.error('上传格式不正确，请上传xls或者xlsx格式')
+        this.$message.error('Unexpected File, please upload .xls or .xlsx file')
         return false
       }
       const fileReader = new FileReader()

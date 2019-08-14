@@ -3,7 +3,7 @@
     el-container.is-vertical.page
       el-header
         fanMenu
-      el-main(v-bind:style="$route.meta.type === '2' ? 'width:90%;min-height:700px' : 'width:100%;min-height:700px'")
+      el-main(v-bind:style="$route.meta.type === '2' ? 'width:90%;min-height:630px' : 'width:100%;min-height:630px'")
         router-view(:key ="key")
         searchTips(v-if = "$route.meta.type === '2'")
         asideTools(v-if = "$route.meta.type === '2'")
@@ -50,7 +50,7 @@ export default {
   color: #333;
   text-align: center;
   padding: 0px;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0px;
   z-index: 3000;
 }

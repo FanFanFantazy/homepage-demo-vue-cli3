@@ -81,13 +81,13 @@ export default {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0 Chrome/71.0.3578.98'
         }
       }, function (err, res) {
-        loading.close();
+        loading.close()
         if (res.statusCode === 404)  {
           that.$message({
             message: 'Invalid Category!',
             showClose: true,
             type: 'error'
-          });
+          })
         }
         if (err) return console.log(err)
         let $ = cheerio.load(res.body.toString())

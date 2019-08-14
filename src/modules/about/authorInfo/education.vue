@@ -46,9 +46,7 @@ export default {
   },
   methods: {
     showBox (index) {
-      console.log(this.showBlock[index])
       this.$set(this.showBlock, index, !this.showBlock[index])
-      console.log(this.showBlock[index])
     }
   }
 }

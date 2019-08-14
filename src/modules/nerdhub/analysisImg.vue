@@ -2,7 +2,7 @@
   div
     el-row(:gutter="10")
       el-col(:span="6")
-        el-card.cardStyle(style="width: 100%; height: 640px;")
+        el-card.cardStyle(style="width: 100%")
           el-row(style="height: 90px;")
             el-upload(ref="upload", accept=".jpg", action="", :on-change="upload",
             :show-file-list="true", :auto-upload="false" class="el-upload", :on-remove="clearList")
@@ -16,14 +16,12 @@
           el-row.rowStyle
             el-input(readonly, v-model="coordinate.color", size="mini", placeholder="colour")
           el-row.rowStyle
-            el-col(:span="6")
-              el-card.appendCard(v-bind:style="'background-color:' + coordinate.color + '; border-color:' + reverseColor(coordinate.color)")
-            el-col(:span="18")
-              el-row.rowStyle(style="text-align: left; margin-top:0px")
-                span(style="margin-right:10px; font-size: 12px;") Show White
-                el-switch(active-color="rgb(108, 138, 124)", inactive-color="#555", v-model="displayWhite")
+            el-card.appendCard(v-bind:style="'background-color:' + coordinate.color + '; border-color:' + reverseColor(coordinate.color)")
+          el-row.rowStyle(style="text-align: left")
+            span(style="margin-right:10px; font-size: 12px;") Show White
+            el-switch(active-color="rgb(108, 138, 124)", inactive-color="#555", v-model="displayWhite")
       el-col(:span="18")
-        el-card.cardStyle(style="width: 640px; height: 640px;")
+        div.cardStyle(style="width: auto; padding: 10px 200px")
           threeDFace(:chartdata="threeD", :displayWhite="displayWhite" chartid="threeDId", :chartSize="{width: '600px', height: '600px'}", @clickbar = "showDataOnBoard")
 </template>
 <script>
@@ -50,8 +48,6 @@ export default {
       this.clearList()
       this.$refs.upload.clearFiles()
     })
-  },
-  created () {
   },
   methods: {
     reverseColor (val) {
@@ -117,6 +113,15 @@ export default {
           data = canvas.toDataURL('image/jpeg') // finish zip the image
           that.threeD = data
         }
+      }
+      reader.onabort = function () {
+        that.$message.error('Loading Interrupted!')
+      }
+      reader.onerror = function () {
+        that.$message.error('Loading Error!')
+      }
+      reader.onloadend = function () {
+        that.$message.success('Loading Succeed!')
       }
     }
   }
