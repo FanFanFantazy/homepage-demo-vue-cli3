@@ -32,7 +32,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "image-webpack-loader": "^4.6.0",
     "lint-staged": "^8.1.4",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "pug": "^2.0.3",
     "pug-filters": "^3.1.0",
     "pug-loader": "^2.4.0",
