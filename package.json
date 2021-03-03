@@ -34,7 +34,7 @@
     "eslint-plugin-vue": "^5.2.3",
     "image-webpack-loader": "^7.0.1",
     "lint-staged": "^8.2.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-filters": "^3.1.1",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
